@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { MdClose } from "react-icons/md";
-
+import { useAuth } from "../context/AuthContext";
 
 
 export const UserLogin = ({ isOpenL, onCloseL }) => {
