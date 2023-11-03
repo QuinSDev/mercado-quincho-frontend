@@ -1,10 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { MysqlConfig} from "../src/mysql/MysqlConfig";
+import Modal from "react-modal";
+import "./index.css";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+Modal.setAppElement("#root");
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <AuthProvider>
+ <BrowserRouter>
     <App />
-  </React.StrictMode>,
-)
+  </BrowserRouter>
+  // </AuthProvider>
+);
