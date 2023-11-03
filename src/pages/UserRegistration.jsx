@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { MdClose } from "react-icons/md";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export const UserRegistration = ({ isOpen, onClose }) => {
-  // const auth = useAuth();
+  const auth = useAuth();
   const [name, setName] = useState(" ");
   const [lastName, setLastName] = useState(" ");
   const [address, setAddress] = useState(" ");
@@ -16,39 +16,19 @@ export const UserRegistration = ({ isOpen, onClose }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    if (passwordsMatch) {
-      try {
-        // Crea un objeto que contiene los datos del formulario
-        const userData = {
-          name: name,
-          lastName: lastName,
-          address: address,
-          phoneNumber: phoneNumber,
-          email: email,
-          password: password,
-          confirmPassword: confirmPassword,
-        };
-
-        // Realiza la solicitud POST al servidor de Spring
-        const response = await axios.post("http://localhost:8080/auth/register", userData);
-
-        if (response.status === 200) {
-          alert("¡Registro exitoso!");
-          // Restablece los campos del formulario
-          setName("");
-          setLastName("");
-          setAddress("");
-          setPhoneNumber("");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
-        } else {
-          alert("Error en el registro");
-        }
-      } catch (error) {
-        alert("Error en la solicitud");
-      }
+    try {
+      auth.register(
+        name,
+        lastName,
+        address,
+        phoneNumber,
+        email,
+        password,
+        confirmPassword
+      );
+      alert("¡Registro exitoso!");
+    } catch (error) {
+      alert("Ingrese valores válidos");
     }
   };
 
