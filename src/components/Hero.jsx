@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Hero = ({ openLoginModal }) => {
+export const Hero = () => {
   return (
     <div
       className="hero h-[80vh]"
@@ -22,9 +22,9 @@ export const Hero = ({ openLoginModal }) => {
             para ayudarte a crear momentos inolvidables. ¡Comienza a explorar
             hoy mismo!
           </p>
-          <button type="submit" className="btnQuincho" onClick={openLoginModal}>
-            <Link to="/login">Ingresar</Link>
-          </button>
+          <Link to="/quinchos">
+            <button className="btnQuincho">Ingresar</button>
+          </Link>
         </div>
       </div>
     </div>

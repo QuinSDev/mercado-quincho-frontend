@@ -1,16 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "../src/context/AuthContext";
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import { App } from './App'
 import Modal from "react-modal";
-import "./index.css";
-import App from "./App";
 
 Modal.setAppElement("#root");
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
- <BrowserRouter>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     <App />
-  </BrowserRouter>
-  </AuthProvider>
-);
+  </React.StrictMode>,
+)
+
