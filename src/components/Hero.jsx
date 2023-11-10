@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Hero = ({ openLoginModal }) => {
+export const Hero = () => {
+
   return (
     <div
       className="hero h-[80vh]"
@@ -17,14 +18,17 @@ export const Hero = ({ openLoginModal }) => {
             ¡Bienvenidos a Mercado Quincho!
           </h1>
           <p className="mb-5 text-white">
-            Encuentra y reserva quincho para tus eventos al aire libre. Explora
+
+            Encuentra y reserva quinchos para tus eventos al aire libre. Explora
+
             nuestras opciones y disfruta de un proceso sencillo. Estamos aquí
             para ayudarte a crear momentos inolvidables. ¡Comienza a explorar
             hoy mismo!
           </p>
-          <button type="submit" className="btnQuincho" onClick={openLoginModal}>
-            <Link to="/login">Ingresar</Link>
-          </button>
+          <Link to="/quinchos">
+            <button className="btnQuincho">Ingresar</button>
+          </Link>
+
         </div>
       </div>
     </div>

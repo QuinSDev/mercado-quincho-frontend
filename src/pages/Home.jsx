@@ -1,12 +1,15 @@
-import React from 'react'
-import { Footer } from '../components/Footer';
-import { Layout } from '../components/Layout';
+import React from "react";
+import { NavBar } from "../components/NavBar";
+import { Hero } from "../components/Hero";
+import { Footer } from "../components/Footer";
+
 
 export const Home = () => {
   return (
     <>
-    <Layout/>
-    <Footer/>
+      <NavBar />
+      <Hero />
+      <Footer /> 
     </>
-  )
-}
+  );
+};
