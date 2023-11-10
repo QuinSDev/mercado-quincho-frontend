@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .btnQuincho {
+    @apply w-full bg-[#35C5DF]  text-white hover:bg-black font-semibold py-2 rounded-md transition duration-300
+  }
 
-/*.btnQuincho {
-    @apply bg-[#35C5DF] text-white hover:bg-black hover:text-white font-semibold px-3 py-1.5 rounded-md transition duration-300
-  }*/
+  .liMenu {
+    @apply hover:bg-[#35c6df73] rounded-md transition duration-300
+  }
+   
+}
 
   .btnQuincho {
     background-color: #35C5DF;
@@ -17,3 +23,78 @@
     color: white;
     font-weight: bold;
   }
+
+  .formQuincho{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 5px;
+  }
+
+  .formQuincho input{
+    color: #706c6c;
+    background: none;
+    border: solid 1px #706c6c;
+    border-radius: 4px;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .formQuincho input:focus{
+    border: solid 2px #35C5DF;
+    outline: none;
+  }
+
+  .formQuincho label{
+    font-size: 18px;
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    cursor: pointer;
+    color: #706c6c;
+    transition: transform .2s;
+  }
+
+  .formQuincho input:focus + label,
+  .formQuincho input:not(:placeholder-shown) + label{
+
+    transform: translateY(-24px);
+    background: white;
+    color: #35C5DF;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .formQuincho input:not(:focus) + label{
+    color: #706c6c;
+  }
+
+  .formQuincho select{
+    color: #706c6c;
+    background: none;
+    border: solid 1px #706c6c;
+    border-radius: 4px;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .formQuincho select option{
+    font-size: 18px;
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    cursor: pointer;
+    color: #706c6c; 
+  }
+
+  .formQuincho select option:hover{
+    background-color: #35C5DF;
+    color: white;
+  }
+
+  .formQuincho select:focus{
+    border: solid 2px #35C5DF;
+    outline: none;
+  }
+  
+
