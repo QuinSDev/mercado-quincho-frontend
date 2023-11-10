@@ -45,6 +45,7 @@ export const NavBar = ({}) => {
     setRegisterModal(false);
   };
 
+
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -96,6 +97,7 @@ export const NavBar = ({}) => {
         </div>
         <div className="dropdown dropdown-end ">
           <div className="flex items-center gap-6">
+
             <button className="btn btn-ghost btn-circle" onClick={toggleMenu}>
               <svg
                 className="swap-off fill-current"
@@ -187,6 +189,7 @@ export const NavBar = ({}) => {
             <li className="liMenu border-t border-gray-200">
               <a className="block py-2 text-black font-bold ">
                 <Link to="/register/quincho">Sube tu quincho al mercado</Link>
+
               </a>
             </li>
           </ul>

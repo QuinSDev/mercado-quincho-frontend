@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Hero = () => {
+
   return (
     <div
       className="hero h-[80vh]"
@@ -17,7 +18,9 @@ export const Hero = () => {
             ¡Bienvenidos a Mercado Quincho!
           </h1>
           <p className="mb-5 text-white">
+
             Encuentra y reserva quinchos para tus eventos al aire libre. Explora
+
             nuestras opciones y disfruta de un proceso sencillo. Estamos aquí
             para ayudarte a crear momentos inolvidables. ¡Comienza a explorar
             hoy mismo!
@@ -25,6 +28,7 @@ export const Hero = () => {
           <Link to="/quinchos">
             <button className="btnQuincho">Ingresar</button>
           </Link>
+
         </div>
       </div>
     </div>
