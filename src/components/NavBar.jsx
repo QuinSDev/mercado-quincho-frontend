@@ -180,7 +180,7 @@ export const NavBar = ({}) => {
             </li>
             <li className="liMenu  border-gray-200">
               <a className="block py-2 text-black font-semibold ">
-                Tu cuenta
+              <Link to="/userAccount">Tu cuenta</Link>
               </a>
             </li>
            {/*////////////////////////////////////////////////////////////////////*/}

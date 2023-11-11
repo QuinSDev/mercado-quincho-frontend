@@ -61,13 +61,13 @@ export const data = [
         nameQuincho: 'Quincho 5',
         location: 'Quito, Ecuador',
         description: 'Casa con Piscina muy bonita',
-        typeQuincho: 'Casas con Piscina',
+        typeQuincho: 'Cabañas',
         price: 150,
         numGuest: 5,
         numBedroon: 4,
         numBed: 3,
         numBathRoon: 3,
-        image: 'https://cf2.bstatic.com/xdata/images/hotel/max1024x768/276566186.jpg?k=681761e36f575662ecb29ab4d70e64e6fcb7a586cbfd69fe794275259c31eb5a&o=&hp=1',
+        image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/f7/a3/eb/glamping-la-herradura.jpg?w=700&h=-1&s=1',
     },
 
     {
@@ -75,13 +75,13 @@ export const data = [
         nameQuincho: 'Quincho 6',
         location: 'Guayaquil, Ecuador',
         description: 'Casa con Piscina muy bonita',
-        typeQuincho: 'Casas con Piscina',
+        typeQuincho: 'Cabañas',
         price: 80,
         numGuest: 2,
         numBedroon: 1,
         numBed: 1,
         numBathRoon: 1,
-        image: 'https://cf2.bstatic.com/xdata/images/hotel/max1024x768/276566186.jpg?k=681761e36f575662ecb29ab4d70e64e6fcb7a586cbfd69fe794275259c31eb5a&o=&hp=1',
+        image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/f7/a3/eb/glamping-la-herradura.jpg?w=700&h=-1&s=1',
     },
 
     {
@@ -89,13 +89,13 @@ export const data = [
         nameQuincho: 'Quincho 7',
         location: 'Guayaquil, Ecuador',
         description: 'Casa con Piscina muy bonita',
-        typeQuincho: 'Casas con Piscina',
+        typeQuincho: 'Cabañas',
         price: 80,
         numGuest: 2,
         numBedroon: 1,
         numBed: 1,
         numBathRoon: 1,
-        image: 'https://cf2.bstatic.com/xdata/images/hotel/max1024x768/276566186.jpg?k=681761e36f575662ecb29ab4d70e64e6fcb7a586cbfd69fe794275259c31eb5a&o=&hp=1',
+        image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/f7/a3/eb/glamping-la-herradura.jpg?w=700&h=-1&s=1',
     },
 
     {
@@ -103,13 +103,13 @@ export const data = [
         nameQuincho: 'Quincho 8',
         location: 'Guayaquil, Ecuador',
         description: 'Casa con Piscina muy bonita',
-        typeQuincho: 'Casas con Piscina',
+        typeQuincho: 'Cabañas',
         price: 80,
         numGuest: 2,
         numBedroon: 1,
         numBed: 1,
         numBathRoon: 1,
-        image: 'https://cf2.bstatic.com/xdata/images/hotel/max1024x768/276566186.jpg?k=681761e36f575662ecb29ab4d70e64e6fcb7a586cbfd69fe794275259c31eb5a&o=&hp=1',
+        image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/f7/a3/eb/glamping-la-herradura.jpg?w=700&h=-1&s=1',
     },
 
     {

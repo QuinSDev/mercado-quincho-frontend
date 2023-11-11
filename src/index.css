@@ -16,6 +16,11 @@
   .btnQuincho {
     background-color: #35C5DF;
     color: white;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    height: 50px;
   }
 
   .btnQuincho:hover {
@@ -28,7 +33,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 5px;
+    
   }
 
   .formQuincho input{

@@ -11,6 +11,8 @@ import { UserRegisterForm } from "./pages/UserRegisterForm";
 import { UserLoginForm } from "./pages/UserLoginForm";
 import { HomeQuincho } from "./pages/HomeQuincho";
 import { Dashboard } from "./pages/Dashboard"
+import { UserAccount } from "./pages/UserAccount";
+import { EditUserForm } from "./pages/EditUserForm"
 
 export const App = () => {
   
@@ -27,6 +29,9 @@ export const App = () => {
         <Route path="/register/quincho" element={<QuinchoForm />} />
         <Route path="/quinchos" element={<HomeQuincho />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/userAccount" element={<UserAccount />} />
+        <Route path="/editUser" element={<EditUserForm />} />
+
       </Routes>
     </Router>
     </>

@@ -3,17 +3,17 @@ import { UserList } from './UserList';
 import { QuinchoList } from "./QuinchoList";
 import { ComentaryList } from "./ComentaryList";
 import { ImageList } from './ImageList';
-import users from "../assets/images/users.png"
+import { Profile } from './Profile';
 import home from "../assets/images/home.png"
-import comentary from "../assets/images/comentary.png"
-import image from "../assets/images/image.png"
+import user from "../assets/images/user.png"
+import reservation from "../assets/images/reservation.png"
 
-export const AdminBar = () => {
+export const UserBar = () => {
 
     const [option,setOption]= useState('');
 
     const changeUser = () => {
-        setOption('users');
+        setOption('profile');
       };
 
     const changeQuincho = () => {
@@ -21,29 +21,22 @@ export const AdminBar = () => {
       };
 
     const changeComentary = () => {
-        setOption('comentaries');
-      };
-
-    const changeImage = () => {
-        setOption('photos');
+        setOption('reservations');
       };
 
 
     const filterOption = (option) => {
-        if (option === 'users') {
-           return <UserList/>
+        if (option === 'profile') {
+           return <Profile/>
         }
         if (option === 'quinchos') {
            return <QuinchoList/>
         }
-        if (option === 'comentaries') {
+        if (option === 'reservations') {
            return <ComentaryList/>
         }
-        if (option === 'photos') {
-           return <ImageList/>
-        }
         else{
-            return <UserList/>
+            return <Profile />
         }
 
         
@@ -59,7 +52,7 @@ export const AdminBar = () => {
                 <ul className="shadow-lg m-4 menu bg-base-200 lg:menu-horizontal rounded-box">
 
                     <li className="m-3 text-2xl font-bold">
-                        Panel de Control
+                        Tu cuenta
                     </li>
 
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
@@ -71,10 +64,10 @@ export const AdminBar = () => {
                             </svg>*/}
                             <img
                                 className="h-10 w-10"
-                                src={users}
-                                alt="Logo de usuarios"
+                                src={user}
+                                alt="Logo de quinchos"
                             />
-                            Usuarios
+                            Tu Perfil
                         </a>
                     </li>
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
@@ -82,13 +75,13 @@ export const AdminBar = () => {
                         <a onClick={changeQuincho}>
                             {/*<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                        </svg>*/}
+                            </svg>*/}
                             <img
                                 className="h-10 w-10"
                                 src={home}
                                 alt="Logo de quinchos"
                             />
-                            Quinchos
+                            Tus Quinchos
                         </a>
                     </li>
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
@@ -99,24 +92,10 @@ export const AdminBar = () => {
                             </svg>*/}
                             <img
                                 className="h-10 w-10"
-                                src={comentary}
-                                alt="Logo de comentarios"
+                                src={reservation}
+                                alt="Logo de reservas"
                             />
-                            Comentarios
-                        </a>
-                    </li>
-                    <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
-
-                        <a onClick={changeImage}>
-                            {/*<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                            </svg>*/}
-                            <img
-                                className="h-10 w-10"
-                                src={image}
-                                alt="Logo de imagenes"
-                            />
-                            Imagenes
+                            Tus Reservas
                         </a>
                     </li>
 
