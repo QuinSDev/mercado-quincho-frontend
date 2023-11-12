@@ -9,7 +9,6 @@ export const Home = () => {
       <NavBar />
       <Hero />
       <Footer />
-     
     </>
   );
 };

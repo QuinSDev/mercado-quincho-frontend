@@ -11,7 +11,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    
+
 
     if (!email || !password) {
       alert("Por favor, complete todos los campos.");
@@ -67,7 +67,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
           // Almacenar el token en el almacenamiento local
           updateAuthStatus();
           alert("¡El inicio de sesión fue exitoso!");
-          
+
           closeModal();
           navigate("/");
         } else {
@@ -127,7 +127,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
       <form className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-2xl">
 
 
-      <div className="mt-6 formQuincho">
+        <div className="mt-6 formQuincho">
           <input type="email"
             name="email"
             id="email"
@@ -146,7 +146,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
         </div>
 
 
-      
+
         <div className="mb-4">
           <div className="flex items-start">
             <div className="flex items-center h-5">

@@ -229,17 +229,8 @@ export const EditUserForm = () => {
             > Modificar</button>
           </div>
 
-
-
-
-
         </form >
       </div>
-
-
-
-
-
 
     </>
   );
