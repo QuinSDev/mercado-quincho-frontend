@@ -1,6 +1,5 @@
 import React from 'react'
-import { NavBarAdm } from '../components/NavBarAdm'
-import { UserList } from '../components/UserList'
+import { AdminBar } from '../components/AdminBar'
 import { NavBar } from '../components/NavBar'
 
 export const Dashboard = () => {
@@ -9,8 +8,8 @@ export const Dashboard = () => {
     <>
     <div data-theme="light">
     <NavBar/>
-    <NavBarAdm/>
-    <UserList/>
+    <AdminBar/>
+    
     </div>
     </>
   )

@@ -1,70 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { dataUser } from "../api/Users";
 
 export const UserList = () => {
 
-    const users = [
-        {
-            idUser: 1,
-            name: "Laura",
-            lastName: "Perez",
-            address: "calle 2, departamento, provincia, pais",
-            phoneNumber: 2615882266,
-            email: "laura@gmail.com",
-            role: "owner",
-            photo: "https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg",
-        },
-
-        {
-            idUser: 2,
-            name: "Federico",
-            lastName: "Perez",
-            address: "calle 2, departamento, provincia, pais",
-            phoneNumber: 2615882266,
-            email: "fede@gmail.com",
-            role: "owner",
-            photo: "https://www.infobae.com/new-resizer/YUHwdChjidsi6q1oOt07qWGGkTk=/1440x960/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/R2E3MWK5PFCKPHEMWA2ZRTDVJQ.jpg",
-        },
-
-        {
-            idUser: 3,
-            name: "Laura",
-            lastName: "Perez",
-            address: "calle 2, departamento, provincia, pais",
-            phoneNumber: 2615882266,
-            email: "laura@gmail.com",
-            role: "client",
-            photo: "https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg",
-        },
-        {
-            idUser: 2,
-            name: "Federico",
-            lastName: "Perez",
-            address: "calle 2, departamento, provincia, pais",
-            phoneNumber: 2615882266,
-            email: "fede@gmail.com",
-            role: "owner",
-            photo: "https://www.infobae.com/new-resizer/YUHwdChjidsi6q1oOt07qWGGkTk=/1440x960/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/R2E3MWK5PFCKPHEMWA2ZRTDVJQ.jpg",
-        },
-
-    ]
-
+    const [users, setUsers] = useState(dataUser);
+    
     return (
         <>
             <div data-theme="light" className="m-6 overflow-x-auto">
-            <h2 className="m-4 text-2xl font-bold tracking-tight text-gray-900">
-            Lista de Usuarios
-          </h2>
-                
+        
+            <h2 className="mt-4 text-2xl border-b-2 md:text-3xl font-bold text-black mb-2 p-2 text-center">Lista de Usuarios</h2>
 
-                <table className="table">
+                <table className="table m-6 max-w-lg mx-auto p-6 bg-white rounded-md shadow-2xl">
+                
                     <thead>
-                        <tr>
+                
+                        <tr className='mt-6'>
                             <th className="text-black text-lg font-bold">Nombre Completo</th>
                             <th className="text-black text-lg font-bold">Direccion</th>
-                            <th className="text-black text-lg font-bold">Telefono</th>
-                            <th className="text-black text-lg font-bold">Correo Electronico</th>
-                            <th className="text-black text-lg font-bold">Rol</th>
-                            <th className="text-black text-lg font-bold">Acciones</th>
+                            <th className="text-black text-lg font-bold mt-8">Telefono</th>
+                            <th className="text-black text-lg font-bold mt-8">Correo Electronico</th>
+                            <th className="text-black text-lg font-bold mt-8">Rol</th>
+                            <th className="text-black text-lg font-bold mt-8">Quinchos</th>
+                            <th className="text-black text-lg font-bold mt-8">Comentarios</th>
+                            <th className="text-black text-lg font-bold mt-8">Imagenes</th>
+                            <th className="text-black text-lg font-bold mt-8"></th>
                         </tr>
                     </thead>
 
@@ -74,7 +34,7 @@ export const UserList = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-16 h-16">
                                                 <img src={user.photo} alt="Photo User" />
                                             </div>
                                         </div>
@@ -89,9 +49,10 @@ export const UserList = () => {
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
-
+                                <td className="hover:text-[#35C5DF] hover:font-semibold">Quinchos Publicados</td>{/*link a quinchos*/}
+                                <td className="hover:text-[#35C5DF] hover:font-semibold">Comentarios Publicados</td>{/*link a comentario/s*/}
+                                <td className="hover:text-[#35C5DF] hover:font-semibold">Imagenes Posteadas</td>{/*link a foto/s*/}
                                 <th>
-                                    <button className="btn btnQuincho p-4">Actualizar</button>
                                     <button className="btn btnQuincho p-4">Eliminar</button>
                                 </th>
                             </tr>

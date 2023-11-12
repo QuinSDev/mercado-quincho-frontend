@@ -11,7 +11,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    
+
 
     if (!email || !password) {
       alert("Por favor, complete todos los campos.");
@@ -67,7 +67,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
           // Almacenar el token en el almacenamiento local
           updateAuthStatus();
           alert("¡El inicio de sesión fue exitoso!");
-          
+
           closeModal();
           navigate("/");
         } else {
@@ -124,41 +124,29 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
       <h2 className="text-2xl border-b-2 md:text-3xl font-bold text-black mb-2 p-2 text-center">
         Iniciar sesión
       </h2>
-      <form data-theme="light" className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-2xl">
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block mb-2 text-sm font-semibold text-black"
-          >
-            Email:
-          </label>
-          <input
-            type="email"
+      <form className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-2xl">
+
+
+        <div className="mt-6 formQuincho">
+          <input type="email"
             name="email"
             id="email"
-            className="form-input w-full px-3 py-2 text-black rounded-md border focus:ring-2 focus:ring-[#35C5DF] "
-            placeholder="name@company.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            value={email} onChange={(e) => setEmail(e.target.value)}
+            placeholder=" " />
+          <label htmlFor="email">Email</label>
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm font-semibold text-black"
-          >
-            Contraseña:
-          </label>
-          <input
-            type="password"
+
+        <div className="mt-6 formQuincho">
+          <input type="password"
             name="password"
             id="password"
-            placeholder="••••••••"
-            className="form-input w-full px-3 py-2 text-black rounded-md border focus:ring-2 focus:ring-[#35C5DF]"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            value={password} onChange={(e) => setPassword(e.target.value)}
+            placeholder=" " />
+          <label htmlFor="password">Contraseña</label>
         </div>
+
+
+
         <div className="mb-4">
           <div className="flex items-start">
             <div className="flex items-center h-5">
@@ -177,6 +165,7 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
             </label>
           </div>
         </div>
+
         <div className="mb-4">
           <a
             href="#"

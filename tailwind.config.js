@@ -3,18 +3,19 @@
 export default {
   content: ["./index.html",
   "./src/**/*.{js,ts,jsx,tsx}",],
-
-  themes: {
+  
+  theme: {
     extend: {
       fontFamily: {
         'Gayathri': ['Gayathri', 'sans-serif']
       }
     },
   },
-
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui")
+  ],
+  daisyui: {
+    theme: false,
+    lightTheme: "light"
+  },
 }
-
-
-
-

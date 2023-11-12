@@ -172,6 +172,18 @@ export const NavBar = ({}) => {
                 Centro de ayuda
               </a>
             </li>
+            {/*////////////////////////////////////////////////////////////////////*/}
+            <li className="liMenu border-t border-gray-200">
+              <a className="block py-2 text-black font-bold ">
+                <Link to="/dashboard">Panel de Control</Link>
+              </a>
+            </li>
+            <li className="liMenu  border-gray-200">
+              <a className="block py-2 text-black font-semibold ">
+              <Link to="/userAccount">Tu cuenta</Link>
+              </a>
+            </li>
+           {/*////////////////////////////////////////////////////////////////////*/}
             <li className="liMenu border-t border-gray-200">
               <a className="block py-2 text-black font-bold ">
                 <Link to="/register/quincho">Sube tu quincho al mercado</Link>

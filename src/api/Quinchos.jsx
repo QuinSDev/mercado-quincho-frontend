@@ -1,4 +1,5 @@
 export const data = [
+
     {
       id: 1,
       nameQuincho: "Quincho 1",
@@ -44,6 +45,8 @@ export const data = [
         "https://cf2.bstatic.com/xdata/images/hotel/max1024x768/348392973.jpg?k=1ebf441d212b9e54c1aae282e5c3ecd2ab66beac82508fc8ff05f0d811049a3b&o=&hp=1",
     },
 
+
+
     {
       id: 4,
       nameQuincho: "Quincho 4",
@@ -64,7 +67,7 @@ export const data = [
       nameQuincho: "Quincho 5",
       location: "Quito, Ecuador",
       description: "Casa con Piscina muy bonita",
-      typeQuincho: "Casas con Piscina",
+      typeQuincho: "Cabañas",
       price: 150,
       numGuest: 5,
       numBedroon: 4,
@@ -79,7 +82,7 @@ export const data = [
       nameQuincho: "Quincho 6",
       location: "Guayaquil, Ecuador",
       description: "Casa con Piscina muy bonita",
-      typeQuincho: "Casas con Piscina",
+      typeQuincho: "Cabañas",
       price: 80,
       numGuest: 2,
       numBedroon: 1,
@@ -154,7 +157,7 @@ export const data = [
       nameQuincho: "Quincho 5",
       location: "Quito, Ecuador",
       description: "Casa con Piscina muy bonita",
-      typeQuincho: "Casas con Piscina",
+      typeQuincho: "Cabañas",
       price: 150,
       numGuest: 5,
       numBedroon: 4,
@@ -169,7 +172,7 @@ export const data = [
       nameQuincho: "Quincho 6",
       location: "Guayaquil, Ecuador",
       description: "Casa con Piscina muy bonita",
-      typeQuincho: "Casas con Piscina",
+      typeQuincho: "Cabañas",
       price: 80,
       numGuest: 2,
       numBedroon: 1,
@@ -179,3 +182,5 @@ export const data = [
         "https://cf2.bstatic.com/xdata/images/hotel/max1024x768/276566186.jpg?k=681761e36f575662ecb29ab4d70e64e6fcb7a586cbfd69fe794275259c31eb5a&o=&hp=1",
     },
   ];
+
+    
