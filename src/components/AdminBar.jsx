@@ -29,25 +29,20 @@ export const AdminBar = () => {
       };
 
 
-    const filterOption = (option) => {
-        if (option === 'users') {
-           return <UserList/>
+      const filterOption = (option) => {
+        switch (option) {
+          case "users":
+            return <UserList />;
+          case "quinchos":
+            return <QuinchoList />;
+          case "comentaries":
+            return <ComentaryList />;
+          case "photos":
+            return <ImageList />;
+          default:
+            return <UserList />;
         }
-        if (option === 'quinchos') {
-           return <QuinchoList/>
-        }
-        if (option === 'comentaries') {
-           return <ComentaryList/>
-        }
-        if (option === 'photos') {
-           return <ImageList/>
-        }
-        else{
-            return <UserList/>
-        }
-
-        
-    };
+      };
 
 
 

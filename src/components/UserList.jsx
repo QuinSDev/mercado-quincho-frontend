@@ -1,9 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { dataUser } from "../api/Users";
 
 export const UserList = () => {
+    const [users, setUsers] = useState([]);
 
-    const [users, setUsers] = useState(dataUser);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        // Obtener la lista de usuarios
+        const responseUsers = await fetch("http://localhost:8080/admin/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!responseUsers.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const dataUsers = await responseUsers.json();
+        setUsers(dataUsers);
+
+        // Obtener las fotos para cada usuario
+        const promises = dataUsers.map(async (user) => {
+          const responsePhoto = await fetch(`http://localhost:8080/photo/perfil/${user.email}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (responsePhoto.ok) {
+            const imageBlob = await responsePhoto.blob();
+            return {
+              ...user,
+              photoUrl: URL.createObjectURL(imageBlob),
+            };
+          } else {
+            // Manejar el caso en el que no se puede cargar la imagen del usuario
+            console.error(`No se pudo cargar la imagen del usuario ${user.email}`);
+            return {
+              ...user,
+              photoUrl: null,
+            };
+          }
+        });
+
+        // Esperar a que todas las promesas se resuelvan y actualizar el estado de los usuarios
+        const usersWithPhotos = await Promise.all(promises);
+        setUsers(usersWithPhotos);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Manejar errores, puedes establecer un estado de error si es necesario
+      }
+    };
+
+    fetchData();
+  }, []);
     
     return (
         <>
@@ -35,7 +89,7 @@ export const UserList = () => {
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-16 h-16">
-                                                <img src={user.photo} alt="Photo User" />
+                                                <img src={user.photoUrl} alt="Photo User" />
                                             </div>
                                         </div>
                                         <div>

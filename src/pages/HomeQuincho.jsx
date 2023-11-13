@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavBar } from '../components/NavBar'
 import { QuinchoBar } from '../components/QuinchoBar'
 import { Footer } from '../components/Footer'
 
-export const HomeQuincho = () => {
+export const HomeQuincho = ({ userRole, isLoggedIn, handleLogout, userPhoto, updateAuthStatus }) => {
+  const quinchoUserForm = true;
+
   return (
     <>
-      <div data-theme="light" >
-        <NavBar />
-        <QuinchoBar />
-        <Footer />
-      </div>
+    <div data-theme="light" >
+    <NavBar quinchoUserForm={quinchoUserForm} userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>
+    <QuinchoBar/>
+    <Footer />
+    </div>
     </>
   )
 }

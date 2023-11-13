@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,25 +13,81 @@ import { HomeQuincho } from "./pages/HomeQuincho";
 import { Dashboard } from "./pages/Dashboard"
 import { UserAccount } from "./pages/UserAccount";
 import { EditUserForm } from "./pages/EditUserForm"
+import { jwtDecode } from "jwt-decode";
 
 export const App = () => {
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userPhoto, setUserPhoto] = useState(null);
+  const [userRole, setUserRole] = useState(false);
+
+  // Función para actualizar el estado de autenticación
+  const updateAuthStatus = async () => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const userEmail = decoded.sub;
+        const role = decoded.role;
+        // console.log(decoded)
+        if (role === "ADMIN") {
+          console.log(role);
+          setUserRole(true);
+        } else {
+          setUserRole(false);
+        }
+
+        const response = await fetch(
+          `http://localhost:8080/photo/perfil/${userEmail}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const imageBlob = await response.blob();
+          setUserPhoto(URL.createObjectURL(imageBlob));
+        } else {
+          // Manejar el caso en el que no se puede cargar la imagen del usuario
+          console.error("No se pudo cargar la imagen del usuario");
+        }
+      } catch (error) {
+        console.error("Error al cargar la imagen del usuario", error);
+      }
+    }
+  };
+  useEffect(() => {
+    // Verificar la autenticación al cargar la página
+    updateAuthStatus();
+  }, []);
+
+  const handleLogout = () => {
+    // Elimina el token de autenticación del almacenamiento local
+    localStorage.removeItem("token");
+    setUserPhoto(null);
+    // Actualiza el estado de autenticación para mostrar el botón de inicio de sesión
+    setIsLoggedIn(false);
+  };
   
   return (
     <>
       <Router>
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route index element={<Home />} />
-          <Route path="/login" element={<UserLoginForm />} />
-          <Route path="/register" element={<UserRegisterForm />} />
+        <Route path="/"element={<Home userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout}userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>}>
+          <Route path="login" element={<UserLoginForm />} />
+          <Route path="register" element={<UserRegisterForm />} />
         </Route>
         <Route path="/register/quincho" element={<QuinchoForm />} />
-        <Route path="/quinchos" element={<HomeQuincho />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/userAccount" element={<UserAccount />} />
-        <Route path="/editUser" element={<EditUserForm />} />
-
+        <Route path="/quinchos/*" element={<HomeQuincho userRole={userRole} isLoggedIn={isLoggedIn} userPhoto={userPhoto} handleLogout={handleLogout} updateAuthStatus={updateAuthStatus}/>}>
+            <Route path="login" element={<UserLoginForm />} />
+            <Route path="register" element={<UserRegisterForm />} />
+        </Route>
+        <Route path="/dashboard" element={<Dashboard userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>}/>       
+        <Route path="/userAccount" element={<UserAccount userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>} />
+        <Route path="/editUser" element={<EditUserForm updateAuthStatus={updateAuthStatus}/>} />
       </Routes>
     </Router>
     </>

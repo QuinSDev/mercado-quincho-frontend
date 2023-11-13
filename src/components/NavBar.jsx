@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../assets/images/logoazul.png";
 import avatar from "../assets/images/avatar.svg";
 import { Link } from "react-router-dom";
@@ -6,28 +6,16 @@ import Modal from "react-modal";
 import { UserRegisterForm } from "../pages/UserRegisterForm";
 import { UserLoginForm } from "../pages/UserLoginForm";
 
-export const NavBar = ({}) => {
+export const NavBar = ({
+  quinchoUserForm,
+  userRole,
+  isLoggedIn,
+  handleLogout,
+  userPhoto,
+  updateAuthStatus,
+}) => {
   const [modalOpen, setModalOpen] = useState(false); // Agrega este estado
   const [registerModal, setRegisterModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Función para actualizar el estado de autenticación
-  const updateAuthStatus = () => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  };
-  useEffect(() => {
-    // Verificar la autenticación al cargar la página
-    updateAuthStatus();
-  }, []);
-
-  const handleLogout = () => {
-    // Elimina el token de autenticación del almacenamiento local
-    localStorage.removeItem("token");
-
-    // Actualiza el estado de autenticación para mostrar el botón de inicio de sesión
-    setIsLoggedIn(false);
-  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -60,7 +48,7 @@ export const NavBar = ({}) => {
       transform: "translate(-50%, -50%)",
       maxWidth: "500px",
       width: "600px",
-      height: "500px", // Establece la altura máxima al 80% del alto de la ventana
+      height: "450px", // Establece la altura máxima al 80% del alto de la ventana
     },
   };
 
@@ -73,7 +61,7 @@ export const NavBar = ({}) => {
       transform: "translate(-50%, -50%)", // Centra horizontalmente y ajusta verticalmente
       maxWidth: "400px", // Ajusta el ancho máximo del modal
       width: "100%", // Establece el ancho al 100%
-      height: "auto",
+      height: "500",
     },
   };
 
@@ -111,30 +99,33 @@ export const NavBar = ({}) => {
               className="btn btn-ghost  btn-circle avatar"
               onClick={toggleMenu}
             >
-              <img src={avatar} alt="Login" />
+              <img src={userPhoto || avatar} alt="User" className="rounded-full"/>
             </button>
           </div>
           <button className="lg:hidden ml-4" onClick={toggleMenu}></button>
           <ul className=" menu-sm  z-10 p-2 shadow-lg dropdown-content rounded-md bg-white text-black text-center m-3 w-52">
-            {!isLoggedIn ? (
-              <li className="liMenu">
-                <a
-                  className="block py-2 text-black font-semibold "
-                  onClick={openModal}
-                >
-                  <Link to="/login">Iniciar sesión</Link>
-                </a>
-              </li>
-            ) : null}
-            {isLoggedIn ? (
-              <li className="liMenu">
-                <a
-                  className="block py-2 text-black font-semibold "
-                  onClick={handleLogout} // Agrega función para cerrar sesión
-                >
-                <Link to="/">  Cerrar sesión</Link>
-                </a>
-              </li>
+            {!isLoggedIn && quinchoUserForm ? (
+              <Link to="/quinchos/login">
+                <li className="liMenu">
+                  <a
+                    className="block py-2 text-black font-semibold "
+                    onClick={openModal}
+                  >
+                    Iniciar sesión
+                  </a>
+                </li>
+              </Link>
+            ) : !isLoggedIn ? (
+              <Link to="/login">
+                <li className="liMenu">
+                  <a
+                    className="block py-2 text-black font-semibold "
+                    onClick={openModal}
+                  >
+                    Iniciar sesión
+                  </a>
+                </li>
+              </Link>
             ) : null}
             <Modal
               isOpen={modalOpen}
@@ -147,16 +138,29 @@ export const NavBar = ({}) => {
                 updateAuthStatus={updateAuthStatus}
               />
             </Modal>
-            {!isLoggedIn ? (
-            <li className="liMenu ">
-              <a
-                className="block py-2 text-black font-semibold text-center"
-                onClick={openRegisterModal}
-              >
-                <Link to={"/register"}> Regístrate</Link>
-              </a>
-            </li>
-            ) : null }
+            {!isLoggedIn && quinchoUserForm ? (
+              <Link to={"/quinchos/register"}>
+                <li className="liMenu ">
+                  <a
+                    className="block py-2 text-black font-semibold text-center"
+                    onClick={openRegisterModal}
+                  >
+                    Regístrate
+                  </a>
+                </li>
+              </Link>
+            ) : !isLoggedIn ? (
+              <Link to={"/register"}>
+                <li className="liMenu ">
+                  <a
+                    className="block py-2 text-black font-semibold text-center"
+                    onClick={openRegisterModal}
+                  >
+                    Regístrate
+                  </a>
+                </li>
+              </Link>
+            ) : null}
             <Modal
               isOpen={registerModal}
               onRequestClose={closeRegisterModal}
@@ -167,28 +171,65 @@ export const NavBar = ({}) => {
                 openModal={openModal}
               />
             </Modal>
+            {isLoggedIn ? (
+              <Link to="/register/quincho">
+                <li className="liMenu border-b border-gray-200">
+                  <a className="block py-2 text-black font-bold ">
+                    Sube tu quincho al mercado
+                  </a>
+                </li>
+              </Link>
+            ) : (
+              <Link to="/register/quincho">
+                <li className="liMenu border-y border-gray-200">
+                  <a className="block py-2 text-black font-bold ">
+                    Sube tu quincho al mercado
+                  </a>
+                </li>
+              </Link>
+            )}
+
+            {/*////////////////////////////////////////////////////////////////////*/}
+
+            {/*////////////////////////////////////////////////////////////////////*/}
+            {isLoggedIn ? (
+              <Link to={"/userAccount"}>
+              <li className="liMenu  border-gray-200">
+                
+                <a className="block py-2 text-black font-semibold ">
+                  Tu cuenta
+                </a>
+                
+              </li>
+              </Link>
+            ) : null}
             <li className="liMenu  border-gray-200">
+              
               <a className="block py-2 text-black font-semibold ">
                 Centro de ayuda
               </a>
             </li>
-            {/*////////////////////////////////////////////////////////////////////*/}
-            <li className="liMenu border-t border-gray-200">
-              <a className="block py-2 text-black font-bold ">
-                <Link to="/dashboard">Panel de Control</Link>
-              </a>
-            </li>
-            <li className="liMenu  border-gray-200">
-              <a className="block py-2 text-black font-semibold ">
-              <Link to="/userAccount">Tu cuenta</Link>
-              </a>
-            </li>
-           {/*////////////////////////////////////////////////////////////////////*/}
-            <li className="liMenu border-t border-gray-200">
-              <a className="block py-2 text-black font-bold ">
-                <Link to="/register/quincho">Sube tu quincho al mercado</Link>
-              </a>
-            </li>
+            {isLoggedIn && userRole && (
+              <Link to="/dashboard">
+                <li className="liMenu border-gray-200">
+                  <a className="block py-2 text-black font-bold ">
+                    Panel de Control
+                  </a>
+                </li>
+              </Link>
+            )}
+            {isLoggedIn ? (
+              <Link to="/">
+                <li className="liMenu border-t border-gray-200">
+                  <a
+                    className="block py-2 text-black font-semibold "
+                    onClick={handleLogout} // Agrega función para cerrar sesión
+                  >
+                    Cerrar sesión
+                  </a>
+                </li>
+              </Link>
+            ) : null}
           </ul>
         </div>
       </div>
