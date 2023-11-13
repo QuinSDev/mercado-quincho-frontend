@@ -123,7 +123,7 @@ export const QuinchoForm = () => {
             <div className="border-b border-gray-900/10 pb-12">
 
               <h2 className="text-2xl border-b-2 md:text-3xl font-bold text-black mb-2 p-2 text-center">Tu Quincho</h2>
-              <p className="text-center mt-1 text-lg leading-6 text-[#35C5DF]">Completa la informacion de tu Quincho.</p>
+              <p className="text-center mt-1 text-lg leading-6 text-[#35C5DF]">Completa la informacion de tu Quincho</p>
 
               <div className="mt-10 col-span-full">
 
@@ -137,7 +137,7 @@ export const QuinchoForm = () => {
                   <label htmlFor="nameQuincho">Nombre del Quincho</label>
                 </div>
 
-                <div className="mt-6 formQuincho">
+                <div className="mt-8 formQuincho">
                   <input type="text"
                     name="location"
                     id="location"
@@ -146,7 +146,7 @@ export const QuinchoForm = () => {
                   <label htmlFor="location">Dirección</label>
                 </div>
 
-                <div className="mt-6 formQuincho">
+                <div className="mt-8 formQuincho">
                   <input type="text"
                     name="description"
                     id="description"
@@ -156,7 +156,7 @@ export const QuinchoForm = () => {
                   <label htmlFor="description">Descripción del Quincho</label>
                 </div>
 
-                <div className="mt-6 formQuincho">
+                <div className="mt-8 formQuincho">
                   <input type="number"
                     name="price"
                     id="price"
@@ -235,19 +235,19 @@ export const QuinchoForm = () => {
                     <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                       <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-white font-semibold text-[#35C5DF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#35C5DF] focus-within:ring-offset-2 hover:text-black">
-                        <span>Upload a file</span>
+                        <span>Sube un archivo</span>
 
                         <input type="file"
-                          id="file"
-                          name="file"
+                          id="file-upload"
+                          name="file-upload"
                           className="sr-only" />
                         {/*ver el nombre en el repositorio para que coincida
                           value={numBathroom} onChange={onInputChange}*/}
 
                       </label>
-                      <p className="pl-1">or drag and drop</p>
+                      <p className="pl-1">o arrastra y sueltalo</p>
                     </div>
-                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF hasta 5 fotos</p>
                   </div>
                 </div>
               </div>

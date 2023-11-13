@@ -6,11 +6,11 @@ import { Footer } from '../components/Footer'
 export const HomeQuincho = () => {
   return (
     <>
-    <div data-theme="light" >
-    <NavBar/>
-    <QuinchoBar/>
-    <Footer />
-    </div>
+      <div data-theme="light" >
+        <NavBar />
+        <QuinchoBar />
+        <Footer />
+      </div>
     </>
   )
 }

@@ -8,6 +8,5 @@ Modal.setAppElement("#root");
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-  </BrowserRouter>
-  </AuthProvider>
-);
+  </React.StrictMode>,
+)
