@@ -218,17 +218,17 @@ export const UserRegisterForm = ({ closeRegisterModal, openModal }) => {
                     <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                       <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-white font-semibold text-[#35C5DF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#35C5DF] focus-within:ring-offset-2 hover:text-black">
-                        <span>Upload a file</span>
+                        <span>Sube un archivo</span>
 
                         <input type="file"
-                          id="file"
-                          name="file"
+                          id="file-upload"
+                          name="file-upload"
                           className="sr-only" />
                         {/*ver el nombre en el repositorio para que coincida
                           value={numBathroom} onChange={onInputChange}*/}
 
                       </label>
-                      <p className="pl-1">or drag and drop</p>
+                      <p className="pl-1">o arrastra y sueltalo</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                   </div>

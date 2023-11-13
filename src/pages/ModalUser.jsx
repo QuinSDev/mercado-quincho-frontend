@@ -1,6 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-export const Card = () => {
+export const ModalUser = () => {
+
+    const [modalOpenUser, setModalOpenUser] = useState(false);
+
     const buttonStyle = {
         backgroundColor: '#35c5df',
         color: '#000', // Cambia el color del texto a negro (#000)
@@ -13,17 +16,20 @@ export const Card = () => {
     };
 
     return (
-        <div className="card w-96 bg-neutral text-neutral-content" style={cardStyle}>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title" style={{ color: '#000' }}>¡Felicidades ya estas registrado!</h2> {/* Cambia el color del título a negro (#000) */}
-                <p style={{ color: '#000' }}>Ya puedes empezar a reservar tu Quincho</p> {/* Cambia el color del texto a negro (#000) */}
-                <p> </p>
-                
-                <div className="card-actions justify-center">
-                
-                    <button style={buttonStyle}>Home</button>
+        <>
+            <div data-theme="light" className="card w-96 bg-neutral text-neutral-content" style={cardStyle}>
+                <div className="card-body items-center text-center">
+                    <h2 className="card-title" style={{ color: '#000' }}>¡Felicidades ya estas registrado!</h2> {/* Cambia el color del título a negro (#000) */}
+                    <p style={{ color: '#000' }}>Ya puedes empezar a reservar tu Quincho</p> {/* Cambia el color del texto a negro (#000) */}
+                    <p> </p>
+
+                    <div className="card-actions justify-center">
+
+                        <button className='btn btnQuincho w-52'>Home</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+
+        </>
+    )
 }
