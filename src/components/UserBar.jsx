@@ -7,6 +7,7 @@ import { Profile } from './Profile';
 import home from "../assets/images/home.png"
 import user from "../assets/images/user.png"
 import reservation from "../assets/images/reservation.png"
+import { CardUserQuincho } from './CardUserQuincho';
 
 export const UserBar = () => {
 
@@ -25,12 +26,12 @@ export const UserBar = () => {
       };
 
 
-    const filterOption = (option) => {
+      const filterOption = (option) => {
         if (option === 'profile') {
            return <Profile/>
         }
         if (option === 'quinchos') {
-           return <QuinchoList/>
+           return <CardUserQuincho/>
         }
         if (option === 'reservations') {
            return <ComentaryList/>

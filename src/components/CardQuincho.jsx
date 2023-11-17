@@ -15,32 +15,29 @@ export const CardQuincho = ({ quinchos }) => {
         setClicks(clicks + 1);
     };*/}
 
-
     const showIcon = (option) => {
 
-        if (option === 'Chalets') {
+        if (option === 'Chalet') {
             return <img
                 className="h-8 w-8"
                 src={chalet}
                 alt="Logo de chalets"
             />
         }
-        if (option === 'Quintas') {
+        if (option === 'Quinta') {
             return <img
                 className="h-8 w-8"
                 src={quinta}
                 alt="Logo de quintas"
             />
         }
-        if (option === 'Cabañas') {
+        if (option === 'Cabaña') {
             return <img
                 className="h-8 w-8"
                 src={cabaña}
                 alt="Logo de cabañas"
             />
         }
-
-
     };
 
     return (
@@ -58,8 +55,9 @@ export const CardQuincho = ({ quinchos }) => {
                             <div className="w-full overflow-hidden rounded-md bg-gray-200 lg:h-80 group-hover:opacity-75">
                                 {/*hover:opacity-75*/}
                                 <img
-                                    src={quincho.image}
+                                    src={quincho.photoUrl}
                                     alt="imagen del quincho"
+                                    loading="lazy" // Agrega el atributo loading="lazy"
                                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                 />
                                 <span aria-hidden="true"

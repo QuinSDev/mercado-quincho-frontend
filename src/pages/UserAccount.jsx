@@ -4,6 +4,10 @@ import { UserBar } from "../components/UserBar"
 
 export const UserAccount = ({ userRole, openRegisterModal, isLoggedIn, handleLogout, userPhoto, updateAuthStatus }) => {
 
+
+
+
+
     return (
         <>
             <div data-theme="light">
