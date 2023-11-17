@@ -1,31 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { data } from '../api/Quinchos'
 import { SearchQuincho } from './SearchQuincho'
 import { CardQuincho } from './CardQuincho'
 
-export const QuinchoBar = () => {
 
-    const allTypes = ['Todos', ...new Set(data.map(quincho => quincho.typeQuincho))]
+export const QuinchoBar = ({quinchos}) => {
+    const [quinchos2, setQuinchos2] = useState([])
+    const [types, setTypes] = useState(['Todos' , 'Chalet' , 'Quinta' , 'Cabaña']);
 
-    const [types, setTypes] = useState(allTypes);
-    const [quinchos, setQuinchos] = useState(data);
-
-    const filterType = (type) => {
+    useEffect(() => {
+        // Actualiza quinchos2 cada vez que quinchos cambia
+        setQuinchos2(quinchos);
+      }, [quinchos]);
+    
+      const filterType = (type) => {
         if (type === 'Todos') {
-            setQuinchos(data)
-            return
+          setQuinchos2(quinchos); // Restablece a la lista completa cuando se selecciona 'Todos'
+        } else {
+          const filterData = quinchos.filter((quincho) => quincho.typeQuincho === type);
+          setQuinchos2(filterData);
         }
-
-        const filterData = data.filter(quincho => quincho.typeQuincho === type);
-        setQuinchos(filterData)
-
-    }
+      };
 
     return (
         <>
             <SearchQuincho types={types} filterType={filterType} />
-            <CardQuincho quinchos={quinchos} />
+            <CardQuincho quinchos={quinchos2} />
 
         </>
 

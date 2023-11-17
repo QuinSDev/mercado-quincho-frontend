@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import { jwtDecode } from "jwt-decode";
 
-export const QuinchoForm = () => {
+export const QuinchoForm = ({ fetchDataQuincho }) => {
   const history = useNavigate();
 
   const onCancelClick = () => {
@@ -38,16 +39,18 @@ export const QuinchoForm = () => {
 
   const handleFileChange = (e) => {
     // Agrega el nuevo archivo a la lista existente
+    const newFile = e.target.files[0];
+  console.log("Nuevo archivo:", newFile);
     setFormState((prevFormState) => ({
       ...prevFormState,
-      files: [...prevFormState.files, e.target.files[0]],
+      files: [...prevFormState.files,newFile],
     }));
-  };  
+  };
 
   useEffect(() => {
     console.log("Archivos actualizados:", formState.files);
   }, [formState.files]);
-  
+
   const onInputChange = ({ target }) => {
     const { name, value } = target;
     setFormState((prevFormState) => ({
@@ -62,13 +65,20 @@ export const QuinchoForm = () => {
     submitUser();
   };
 
-  const API_URL = "http://localhost:8080/quincho/register";
-
   const submitUser = async () => {
     const token = localStorage.getItem("token");
-
+    
     if (!token) {
       alert("Debe iniciar sesión primero para registrar un quincho.");
+      return;
+    }
+
+    const decoded = jwtDecode(token);
+    const userEmail = decoded.sub;
+    const API_URL = `http://localhost:8080/quincho/register/${userEmail}`;
+
+    if (!nameQuincho || !location || !description || !price || !typeQuincho || !numGuest || !numBed || !numBedroom || !numBathroom || files.length === 0) {
+      alert("Por favor, completa todos los campos antes de enviar el formulario.");
       return;
     }
 
@@ -85,7 +95,6 @@ export const QuinchoForm = () => {
     files.forEach((file) => {
       requesData.append("files", file);
     });
-    
 
     const requestOPtions = {
       method: "POST",
@@ -105,6 +114,7 @@ export const QuinchoForm = () => {
       const data = await response.json();
       console.log(token);
       if (data.msg === "Registro éxitoso") {
+        fetchDataQuincho();
         alert(data.msg);
         console.log(data.msg);
       } else {
@@ -127,7 +137,10 @@ export const QuinchoForm = () => {
       numBedroom: "",
       numBathroom: "",
       files: [], // Cambiado de 'file' a 'files'
+
     });
+
+    
   };
 
   return (
@@ -217,7 +230,7 @@ export const QuinchoForm = () => {
                     </option>
                     <option value="Chalet">Chalet</option>
                     <option value="Quinta">Quinta</option>
-                    <option value="Casa con piscina">Casa con piscina</option>
+                    <option value="Cabaña">Cabaña</option>
                   </select>
                 </div>
               </div>

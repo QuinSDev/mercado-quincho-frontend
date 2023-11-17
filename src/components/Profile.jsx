@@ -68,7 +68,7 @@ export const Profile = () => {
           className="m-10 max-w-xl h-150 mx-auto p-10 bg-white rounded-md shadow-2xl"
         >
           {users.map((user) => (
-            <div key={user.idUser}>
+            <div key={user.id}>
               <div className="bg-[#35C5DF] rounded-md shadow-2xl grid grid-cols-2 gap-4 bg-opacity-80">
                 <div className="m-6 avatar shadow-2xl rounded-md mask mask-square w-40 h-40">
                   <img className="rounded-md" src={user.photoUrl} />
