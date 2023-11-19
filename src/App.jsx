@@ -10,6 +10,7 @@ import { UserAccount } from "./pages/UserAccount";
 import { EditUserForm } from "./pages/EditUserForm";
 import { jwtDecode } from "jwt-decode";
 import imageCompression from "browser-image-compression";
+import { QuinchoDetails } from "./pages/QuinchoDetails";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -180,6 +181,10 @@ export const App = () => {
           <Route
             path="/editUser"
             element={<EditUserForm updateAuthStatus={updateAuthStatus} />}
+          />
+              <Route
+            path="/quinchosDetails"
+            element={<QuinchoDetails/>}
           />
         </Routes>
       </Router>
