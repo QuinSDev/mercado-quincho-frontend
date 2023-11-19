@@ -10,10 +10,12 @@ import { UserAccount } from "./pages/UserAccount";
 import { EditUserForm } from "./pages/EditUserForm";
 import { jwtDecode } from "jwt-decode";
 import imageCompression from "browser-image-compression";
+import { QuinchoDetails } from "./pages/QuinchoDetails";
 import { EditQuinchoForm } from "./pages/EditQuinchoForm";
 import { Profile } from "./components/Profile";
 import { CardUserQuincho } from "./components/CardUserQuincho";
 import { ComentaryList } from "./components/ComentaryList";
+
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -194,6 +196,9 @@ export const App = () => {
             path="/editUser"
             element={<EditUserForm updateAuthStatus={updateAuthStatus} />}
           />
+          <Route
+            path="/quinchosDetails"
+            element={<QuinchoDetails/>}
           <Route
             path="/editQuincho"
             element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}

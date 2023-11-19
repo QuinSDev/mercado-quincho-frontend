@@ -4,11 +4,11 @@
 
 @layer components {
   .btnQuincho {
-    @apply w-full bg-[#35C5DF]  text-white hover:bg-black font-semibold py-2 rounded-md transition duration-300
+    @apply w-full bg-[#35C5DF]  text-white hover:bg-black font-semibold py-2 rounded-md transition duration-300;
   }
 
   .liMenu {
-    @apply hover:bg-[#35c6df73] rounded-md transition duration-300
+    @apply hover:bg-[#35c6df73] rounded-md transition duration-300;
   }
    
 }
