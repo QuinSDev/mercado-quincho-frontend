@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import address from "../assets/images/address.png";
 import phone from "../assets/images/phone.png";
 import email from "../assets/images/email.png";
-import password from "../assets/images/password.png";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { UserContext } from "./UserProvider";
 
 export const Profile = () => {
+  const { updateSelectedUser } = useContext(UserContext)
   const [users, setUsers] = useState([]);
+
+  const handSelectUser = (user) => {
+    updateSelectedUser(user)
+  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -26,7 +31,7 @@ export const Profile = () => {
         );
 
         if (response.ok) {
-          const userData = await response.json(); // Parsea el cuerpo de la respuesta como JSON
+          const userData = await response.json();
           setUsers([userData]);
 
           const responsePhoto = await fetch(
@@ -116,18 +121,7 @@ export const Profile = () => {
                   <b>Email: </b> {user.email}
                 </h3>
               </div>
-
-              {/* <div className="flex mt-6 border-[#706c6c] border-2 rounded-md">
-                <img
-                  className="flex-none m-2 w-10 uppercase cursor-pointer"
-                  src={password}
-                  alt="Logo de email"
-                />
-                <h3 className="flex-1 m-3">
-                  <b>Contraseña: </b> {user.password}
-                </h3>
-              </div> */}
-              <Link to="/editUser">
+              <Link to="/editUser" onClick={() => handSelectUser(user)}>
                 <button className="mt-8 btnQuincho">Actualizar Datos</button>
               </Link>
             </div>
