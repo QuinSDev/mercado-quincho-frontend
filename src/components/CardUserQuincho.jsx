@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { data } from "../api/Quinchos";
 import chalet from "../assets/images/chalet.png";
 import quinta from "../assets/images/quinta.png";
 import cabaña from "../assets/images/cabaña.png";
@@ -9,7 +8,6 @@ import { Link } from "react-router-dom";
 import { QuinchoContext } from "./QuinchoProvider";
 
 export const CardUserQuincho = ({ quinchos }) => {
-  // const [quinchos, setQuinchos] = useState(data);
 
   const { updateSelectedQuincho } = useContext(QuinchoContext)
 
@@ -43,7 +41,6 @@ export const CardUserQuincho = ({ quinchos }) => {
 
             {/*imagen*/}
             <div className="mt-2 w-full overflow-hidden  bg-gray-200 lg:h-52 group-hover:opacity-75">
-                {/*hover:opacity-75*/}
                 <img
                     src={quincho.photoUrl}
                     alt="imagen del quincho"
@@ -92,7 +89,6 @@ export const CardUserQuincho = ({ quinchos }) => {
                         <h3 className="mt-0.5 text-sm text-gray-500">
                             <a >
                                 <span aria-hidden="true"/>
-                                {/* className="absolute inset-0"  */}
                                 {quincho.location}
                             </a>
                         </h3>
