@@ -11,6 +11,11 @@ import { EditUserForm } from "./pages/EditUserForm";
 import { jwtDecode } from "jwt-decode";
 import imageCompression from "browser-image-compression";
 import { QuinchoDetails } from "./pages/QuinchoDetails";
+import { EditQuinchoForm } from "./pages/EditQuinchoForm";
+import { Profile } from "./components/Profile";
+import { CardUserQuincho } from "./components/CardUserQuincho";
+import { ComentaryList } from "./components/ComentaryList";
+
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -70,7 +75,9 @@ export const App = () => {
         setQuinchos(dataQuinchos);
 
         const promises = dataQuinchos.map(async (quincho) => {
-          const responsePhoto = await fetch(`http://localhost:8080/quinchos/fotos/${quincho.id}`);
+          const responsePhoto = await fetch(
+            `http://localhost:8080/quinchos/fotos/${quincho.id}`
+          );
 
           if (responsePhoto.ok) {
             const imageBlob = await responsePhoto.blob();
@@ -134,10 +141,13 @@ export const App = () => {
               />
             }
           >
-            <Route path="login" element={<UserLoginForm/>} />
+            <Route path="login" element={<UserLoginForm />} />
             <Route path="register" element={<UserRegisterForm />} />
           </Route>
-          <Route path="/register/quincho" element={<QuinchoForm fetchDataQuincho={fetchDataQuincho}/>} />
+          <Route
+            path="/register/quincho"
+            element={<QuinchoForm fetchDataQuincho={fetchDataQuincho} />}
+          />
           <Route
             path="/quinchos/*"
             element={
@@ -177,14 +187,21 @@ export const App = () => {
                 updateAuthStatus={updateAuthStatus}
               />
             }
-          />
+          >
+            <Route path="profile" element={<Profile />}/>
+            <Route path="quinchos" element={<CardUserQuincho />}/>
+            <Route path="reservations" element={<ComentaryList />}/>
+          </Route>
           <Route
             path="/editUser"
             element={<EditUserForm updateAuthStatus={updateAuthStatus} />}
           />
-              <Route
+          <Route
             path="/quinchosDetails"
             element={<QuinchoDetails/>}
+          <Route
+            path="/editQuincho"
+            element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}
           />
         </Routes>
       </Router>
