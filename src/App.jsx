@@ -30,10 +30,11 @@ export const App = () => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const userEmail = decoded.sub;
+        // const userEmail = decoded.sub;
+        localStorage.setItem("userEmail", decoded.sub)
         const role = decoded.role;
         // console.log(decoded)
-        if (role === "ADMIN") {
+        if (decoded.role === "ADMIN") {
           console.log(role);
           setUserRole(true);
         } else {
@@ -41,7 +42,7 @@ export const App = () => {
         }
 
         const response = await fetch(
-          `http://localhost:8080/photo/perfil/${userEmail}`,
+          `http://localhost:8080/photo/perfil/${decoded.sub}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -198,7 +199,7 @@ export const App = () => {
           />
           <Route
             path="/quinchosDetails"
-            element={<QuinchoDetails/>}
+            element={<QuinchoDetails/>} />
           <Route
             path="/editQuincho"
             element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}

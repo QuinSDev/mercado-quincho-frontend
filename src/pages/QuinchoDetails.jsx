@@ -6,6 +6,12 @@ import { QuinchoContext } from "../provider/QuinchoProviderDetails";
 export const QuinchoDetails = () => {
 
     const { selectedQuincho } = useContext(QuinchoContext)
+    const [quincho, setQuincho] = useState([]);
+
+  useEffect(() => {
+    setQuincho(selectedQuincho)
+  }, [])
+    
   
   return (
     <div className="py-8 px-4 sm:px-8 md:h-[78vh] sm:h-[100vh] bg-white flex flex-col md:flex-row items-center">
@@ -36,7 +42,7 @@ export const QuinchoDetails = () => {
           Precio: ${selectedQuincho.price}
         </p>
         <div className="card-actions flex flex-col md:flex-row justify-center md:justify-start">
-          <CalendarReservationForm />
+          <CalendarReservationForm quincho={quincho}/>
         </div>
       </div>
     </div>
