@@ -79,7 +79,6 @@
 
   .formQuincho input:focus + label,
   .formQuincho input:not(:placeholder-shown) + label{
-
     transform: translateY(-24px);
     background: white;
     color: #35C5DF;
@@ -91,7 +90,8 @@
     color: #706c6c;
   }
 
-  .formQuincho select{
+  .formQuincho select,
+  .formQuincho textarea{
     color: #706c6c;
     background: none;
     border: solid 1px #706c6c;
@@ -114,9 +114,13 @@
     color: white;
   }
 
-  .formQuincho select:focus{
+  .formQuincho select:focus,
+  .formQuincho textarea:focus{
     border: solid 2px #35C5DF;
     outline: none;
   }
   
+  .star input[type=radio]{
+    display: none;
+  }
 

@@ -70,6 +70,7 @@ export const EditQuinchoForm = ({ fetchDataQuincho }) => {
 
   const API_URL = `http://localhost:8080/quincho/edit/${selectedQuincho.id}`;
 
+
   const submitUser = async () => {
     const token = localStorage.getItem("token");
 
@@ -96,6 +97,7 @@ export const EditQuinchoForm = ({ fetchDataQuincho }) => {
         Authorization: `Bearer ${token}`,
       },
       body: requestData,
+
     };
 
     const response = await fetch(API_URL, requestOPtions);
@@ -105,6 +107,7 @@ export const EditQuinchoForm = ({ fetchDataQuincho }) => {
 
     if (contentType && contentType.indexOf("application/json") !== -1) {
       const data = await response.json();
+
       if (data.msg === "Actualización exitosa") {
         fetchDataQuincho();
         alert(data.msg);
@@ -143,6 +146,7 @@ export const EditQuinchoForm = ({ fetchDataQuincho }) => {
                     value={formState.nameQuincho}
                     onChange={onInputChange}
                     placeholder=""
+
                   />
                   <label htmlFor="nameQuincho">Nombre del Quincho</label>
                 </div>

@@ -189,9 +189,6 @@ export const NavBar = ({
               </Link>
             )}
 
-            {/*////////////////////////////////////////////////////////////////////*/}
-
-            {/*////////////////////////////////////////////////////////////////////*/}
             {isLoggedIn ? (
               <Link to={"/userAccount"}>
               <li className="liMenu  border-gray-200">
@@ -203,12 +200,18 @@ export const NavBar = ({
               </li>
               </Link>
             ) : null}
+
+            {/*////////////////////////////////////////////////////////////////////*/}
+            <Link to="/helpCenter">
             <li className="liMenu  border-gray-200">
-              
+            
               <a className="block py-2 text-black font-semibold ">
                 Centro de ayuda
               </a>
             </li>
+            </Link>
+            {/*////////////////////////////////////////////////////////////////////*/}
+            
             {isLoggedIn && userRole && (
               <Link to="/dashboard">
                 <li className="liMenu border-gray-200">
