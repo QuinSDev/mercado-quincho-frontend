@@ -8,10 +8,8 @@ export const Footer = () => {
 
   return (
     <footer
-      className="footer footer-center p-8"
+      className="footer footer-center p-8 text-black rounded"
       style={{ backgroundColor: "#35c5df" }}
-      text-black
-      rounded
     >
       <nav className="grid grid-flow-col gap-4">
         <Link to="/" className="text-2x1 text-black link link-hover">

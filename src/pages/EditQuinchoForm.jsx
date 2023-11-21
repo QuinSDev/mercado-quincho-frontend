@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import { QuinchoContext } from "../components/QuinchoProvider";
 
-export const EditQuinchoForm = () => {
+export const EditQuinchoForm = ({ fetchDataQuincho }) => {
+  const { selectedQuincho } = useContext(QuinchoContext);
+
   const history = useNavigate();
 
   const onCancelClick = () => {
-    history("/", { replace: true });
+    history("/userAccount/quinchos", { replace: true });
     window.scrollTo(0, 0);
   };
 
@@ -20,34 +23,36 @@ export const EditQuinchoForm = () => {
     numBed: "",
     numBedroom: "",
     numBathroom: "",
-    files: [], // Cambiado de 'file' a 'files'
+    files: [],
   });
 
-  const {
-    nameQuincho,
-    location,
-    description,
-    price,
-    typeQuincho,
-    numGuest,
-    numBed,
-    numBedroom,
-    numBathroom,
-    files,
-  } = formState;
+  useEffect(() => {
+    if (selectedQuincho) {
+      setFormState({
+        nameQuincho: selectedQuincho.nameQuincho || "",
+        location: selectedQuincho.location || "",
+        description: selectedQuincho.description || "",
+        price: selectedQuincho.price || "",
+        typeQuincho: selectedQuincho.typeQuincho || "",
+        numGuest: selectedQuincho.numGuest || "",
+        numBed: selectedQuincho.numBed || "",
+        numBedroom: selectedQuincho.numBedroom || "",
+        numBathroom: selectedQuincho.numBathroom || "",
+        files: [],
+      });
+    }
+  }, [selectedQuincho]);
 
   const handleFileChange = (e) => {
     // Agrega el nuevo archivo a la lista existente
+    const newFile = e.target.files[0];
+    console.log("Nuevo archivo:", newFile);
     setFormState((prevFormState) => ({
       ...prevFormState,
-      files: [...prevFormState.files, e.target.files[0]],
+      files: [...prevFormState.files, newFile],
     }));
-  };  
+  };
 
-  useEffect(() => {
-    console.log("Archivos actualizados:", formState.files);
-  }, [formState.files]);
-  
   const onInputChange = ({ target }) => {
     const { name, value } = target;
     setFormState((prevFormState) => ({
@@ -59,10 +64,12 @@ export const EditQuinchoForm = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("Archivos a enviar:", formState.files);
+    console.log("Datos", formState);
     submitUser();
   };
 
-  const API_URL = "http://localhost:8080/quincho/register";
+  const API_URL = `http://localhost:8080/quincho/edit/${selectedQuincho.id}`;
+
 
   const submitUser = async () => {
     const token = localStorage.getItem("token");
@@ -72,20 +79,16 @@ export const EditQuinchoForm = () => {
       return;
     }
 
-    const requesData = new FormData();
-    requesData.append("nameQuincho", nameQuincho);
-    requesData.append("location", location);
-    requesData.append("description", description);
-    requesData.append("price", price);
-    requesData.append("typeQuincho", typeQuincho);
-    requesData.append("numGuest", numGuest);
-    requesData.append("numBed", numBed);
-    requesData.append("numBedroom", numBedroom);
-    requesData.append("numBathroom", numBathroom);
-    files.forEach((file) => {
-      requesData.append("files", file);
+    const requestData = new FormData();
+    Object.entries(formState).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((file) => {
+          requestData.append(key, file);
+        });
+      } else {
+        requestData.append(key, value);
+      }
     });
-    
 
     const requestOPtions = {
       method: "POST",
@@ -93,7 +96,8 @@ export const EditQuinchoForm = () => {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: requesData,
+      body: requestData,
+
     };
 
     const response = await fetch(API_URL, requestOPtions);
@@ -103,31 +107,17 @@ export const EditQuinchoForm = () => {
 
     if (contentType && contentType.indexOf("application/json") !== -1) {
       const data = await response.json();
-      console.log(token);
-      if (data.msg === "Registro éxitoso") {
+
+      if (data.msg === "Actualización exitosa") {
+        fetchDataQuincho();
         alert(data.msg);
         console.log(data.msg);
       } else {
         alert(data.msg);
-
-        console.log(typeQuincho);
       }
     } else {
       throw new Error("La respuesta del servidor no es un JSON válido");
     }
-
-    setFormState({
-      nameQuincho: "",
-      location: "",
-      description: "",
-      price: "",
-      typeQuincho: "",
-      numGuest: "",
-      numBed: "",
-      numBedroom: "",
-      numBathroom: "",
-      files: [], // Cambiado de 'file' a 'files'
-    });
   };
 
   return (
@@ -153,9 +143,10 @@ export const EditQuinchoForm = () => {
                     type="text"
                     name="nameQuincho"
                     id="nameQuincho"
-                    value={nameQuincho}
+                    value={formState.nameQuincho}
                     onChange={onInputChange}
-                    placeholder=" "
+                    placeholder=""
+
                   />
                   <label htmlFor="nameQuincho">Nombre del Quincho</label>
                 </div>
@@ -165,9 +156,9 @@ export const EditQuinchoForm = () => {
                     type="text"
                     name="location"
                     id="location"
-                    value={location}
+                    value={formState.location}
                     onChange={onInputChange}
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label htmlFor="location">Dirección</label>
                 </div>
@@ -178,9 +169,9 @@ export const EditQuinchoForm = () => {
                     name="description"
                     id="description"
                     rows={3}
-                    value={description}
+                    value={formState.description}
                     onChange={onInputChange}
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label htmlFor="description">Descripción del Quincho</label>
                 </div>
@@ -190,9 +181,9 @@ export const EditQuinchoForm = () => {
                     type="number"
                     name="price"
                     id="price"
-                    value={price}
+                    value={formState.price}
                     onChange={onInputChange}
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label htmlFor="price">Precio por Noche</label>
                 </div>
@@ -208,16 +199,19 @@ export const EditQuinchoForm = () => {
                     type="text"
                     name="typeQuincho"
                     id="typeQuincho"
-                    value={typeQuincho}
+                    value={formState.typeQuincho}
                     onChange={onInputChange}
-                    placeholder=" "
+                    placeholder=""
+                    disabled={selectedQuincho}
                   >
                     <option value="" disabled>
-                      <h2>Seleccionar</h2>
+                      {selectedQuincho
+                        ? selectedQuincho.typeQuincho
+                        : "Seleccionar"}
                     </option>
-                    <option value="Chalet">Chalets</option>
-                    <option value="Quinta">Quintas</option>
-                    <option value="Casa con piscina">Cabañas</option>
+                    <option value="Chalet">Chalet</option>
+                    <option value="Quinta">Quinta</option>
+                    <option value="Cabaña">Cabaña</option>
                   </select>
                 </div>
               </div>
@@ -236,9 +230,9 @@ export const EditQuinchoForm = () => {
                       type="number"
                       name="numGuest"
                       id="numGuest"
-                      value={numGuest}
+                      value={formState.numGuest}
                       onChange={onInputChange}
-                      placeholder=" "
+                      placeholder=""
                     />
                     <label htmlFor="numGuest">N° de Huespedes</label>
                   </div>
@@ -248,9 +242,9 @@ export const EditQuinchoForm = () => {
                       type="number"
                       name="numBedroom"
                       id="numBedroom"
-                      value={numBedroom}
+                      value={formState.numBedroom}
                       onChange={onInputChange}
-                      placeholder=" "
+                      placeholder=""
                     />
                     <label htmlFor="numBedroom">N° de Habitaciones</label>
                   </div>
@@ -260,9 +254,9 @@ export const EditQuinchoForm = () => {
                       type="number"
                       name="numBed"
                       id="numBed"
-                      value={numBed}
+                      value={formState.numBed}
                       onChange={onInputChange}
-                      placeholder=" "
+                      placeholder=""
                     />
                     <label htmlFor="numBed">N° de Camas</label>
                   </div>
@@ -272,9 +266,9 @@ export const EditQuinchoForm = () => {
                       type="number"
                       name="numBathroom"
                       id="numBathroom"
-                      value={numBathroom}
+                      value={formState.numBathroom}
                       onChange={onInputChange}
-                      placeholder=" "
+                      placeholder=""
                     />
                     <label htmlFor="numBathroom">N° de Baños</label>
                   </div>
@@ -309,7 +303,6 @@ export const EditQuinchoForm = () => {
                           onChange={handleFileChange}
                           multiple
                         />
-        
                       </label>
                       <p className="pl-1">o arrastra y sueltalo</p>
                     </div>
@@ -326,8 +319,7 @@ export const EditQuinchoForm = () => {
                   className="btn bg-[#000000] text-white hover:bg-[#35C5DF] hover:text-white font-semibold px-3 py-1.5 rounded-md transition duration-300 mt-2"
                   onClick={onCancelClick}
                 >
-                  <Link to="/"> Cancel </Link>
-                  {/*Link to="/userAccount"> Cancel </Link>*/}
+                  <Link to="/userAccount"> Cancel </Link>
                 </button>
                 <button
                   type="submit"
