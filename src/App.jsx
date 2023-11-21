@@ -14,6 +14,9 @@ import { Dashboard } from "./pages/Dashboard"
 import { UserAccount } from "./pages/UserAccount";
 import { EditUserForm } from "./pages/EditUserForm"
 import { jwtDecode } from "jwt-decode";
+import { CardUserQuincho } from "./components/CardUserQuincho";
+import { EditQuinchoForm } from "./pages/EditQuinchoForm";
+import { HelpCenter } from "./pages/HelpCenter";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,6 +91,9 @@ export const App = () => {
         <Route path="/dashboard" element={<Dashboard userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>}/>       
         <Route path="/userAccount" element={<UserAccount userRole={userRole} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>} />
         <Route path="/editUser" element={<EditUserForm updateAuthStatus={updateAuthStatus}/>} />
+        <Route path="/cardUserQuincho" element={<CardUserQuincho />} />
+        <Route path="/editQuincho" element={<EditQuinchoForm />} />
+        <Route path="/helpCenter" element={<HelpCenter />} />
       </Routes>
     </Router>
     </>

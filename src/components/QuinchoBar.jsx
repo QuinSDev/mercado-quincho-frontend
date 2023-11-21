@@ -6,7 +6,8 @@ import { CardQuincho } from './CardQuincho'
 
 export const QuinchoBar = () => {
 
-    const allTypes = ['Todos', ...new Set(data.map(quincho => quincho.typeQuincho))]
+    {/*const allTypes = ['Todos', ...new Set(data.map(quincho => quincho.typeQuincho))]*/}
+    const allTypes = ['Todos' , 'Chalets' , 'Quintas' , 'Cabañas']
 
     const [types, setTypes] = useState(allTypes);
     const [quinchos, setQuinchos] = useState(data);

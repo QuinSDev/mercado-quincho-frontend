@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-export const QuinchoForm = () => {
+export const EditQuinchoForm = () => {
   const history = useNavigate();
 
   const onCancelClick = () => {
@@ -144,7 +144,7 @@ export const QuinchoForm = () => {
                 Tu Quincho
               </h2>
               <p className="text-center mt-1 text-lg leading-6 text-[#35C5DF]">
-                Completa la informacion de tu Quincho.
+                Actualiza la informacion de tu Quincho.
               </p>
 
               <div className="mt-10 col-span-full">
@@ -215,9 +215,9 @@ export const QuinchoForm = () => {
                     <option value="" disabled>
                       <h2>Seleccionar</h2>
                     </option>
-                    <option value="Chalet">Chalet</option>
-                    <option value="Quinta">Quinta</option>
-                    <option value="Casa con piscina">Casa con piscina</option>
+                    <option value="Chalet">Chalets</option>
+                    <option value="Quinta">Quintas</option>
+                    <option value="Casa con piscina">Cabañas</option>
                   </select>
                 </div>
               </div>
@@ -296,20 +296,20 @@ export const QuinchoForm = () => {
                     />
                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                       <label
-                        htmlFor="file"
+                        htmlFor="files"
                         className="relative cursor-pointer rounded-md bg-white font-semibold text-[#35C5DF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#35C5DF] focus-within:ring-offset-2 hover:text-black"
                       >
                         <span>Sube un archivo</span>
 
                         <input
                           type="file"
-                          id="file"
-                          name="file"
+                          id="files"
+                          name="files"
                           className="sr-only"
                           onChange={handleFileChange}
                           multiple
                         />
-                      
+        
                       </label>
                       <p className="pl-1">o arrastra y sueltalo</p>
                     </div>
@@ -327,12 +327,13 @@ export const QuinchoForm = () => {
                   onClick={onCancelClick}
                 >
                   <Link to="/"> Cancel </Link>
+                  {/*Link to="/userAccount"> Cancel </Link>*/}
                 </button>
                 <button
                   type="submit"
                   className="btn bg-[#35C5DF] text-white hover:bg-black hover:text-white font-semibold px-3 py-1.5 rounded-md transition duration-300 mt-2"
                 >
-                  Cargar tu Quincho
+                  Modificar tu Quincho
                 </button>
               </div>
             </div>
