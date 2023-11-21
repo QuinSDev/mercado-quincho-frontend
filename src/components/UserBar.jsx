@@ -8,8 +8,9 @@ import home from "../assets/images/home.png"
 import user from "../assets/images/user.png"
 import reservation from "../assets/images/reservation.png"
 import { CardUserQuincho } from './CardUserQuincho';
+import { Link } from "react-router-dom";
 
-export const UserBar = () => {
+export const UserBar = ({ quinchos }) => {
 
     const [option,setOption]= useState('');
 
@@ -31,7 +32,7 @@ export const UserBar = () => {
            return <Profile/>
         }
         if (option === 'quinchos') {
-           return <CardUserQuincho/>
+           return <CardUserQuincho quinchos={quinchos}/>
         }
         if (option === 'reservations') {
            return <ComentaryList/>
@@ -55,9 +56,9 @@ export const UserBar = () => {
                     <li className="m-3 text-2xl font-bold">
                         Tu cuenta
                     </li>
-
+                    <Link to="/userAccount/profile">
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
-
+                        
                         <a onClick={changeUser}>
                              
                             <img
@@ -68,6 +69,8 @@ export const UserBar = () => {
                             Tu Perfil
                         </a>
                     </li>
+                    </Link>
+                    <Link to="/userAccount/quinchos">
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
 
                         <a onClick={changeQuincho}>
@@ -80,6 +83,8 @@ export const UserBar = () => {
                             Tus Quinchos
                         </a>
                     </li>
+                    </Link>
+                    <Link to="/userAccount/reservations">
                     <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md" >
 
                         <a onClick={changeComentary}>
@@ -92,7 +97,7 @@ export const UserBar = () => {
                             Tus Reservas
                         </a>
                     </li>
-
+                    </Link>
                 </ul>
             </div>
 
@@ -100,3 +105,4 @@ export const UserBar = () => {
         </>
     )
 }
+
