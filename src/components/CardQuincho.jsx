@@ -36,12 +36,12 @@ export const CardQuincho = ({ quinchos }) => {
 
         <div className="mt-6 grid grid-cols-1 gap-x-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {quinchos.map((quincho) => (
-            <div key={quincho.id} className="relative rounded-md shadow-2xl">
+            <div key={quincho.id} className="relative rounded-md shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] hover:shadow-gray-400 hover:scale-105 duration-700">
               {/*imagen*/}
               <div className="w-full overflow-hidden rounded-md bg-gray-200 lg:h-80 group-hover:opacity-75">
                 {/*hover:opacity-75*/}
                 <img
-                  src={quincho.photoUrl}
+                  src={quincho.photoUrls[0]}
                   alt="imagen del quincho"
                   loading="lazy" // Agrega el atributo loading="lazy"
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"

@@ -70,35 +70,41 @@ export const App = () => {
         setQuinchos(dataQuinchos);
 
         const promises = dataQuinchos.map(async (quincho) => {
-          const responsePhoto = await fetch(`http://localhost:8080/quinchos/fotos/${quincho.id}`);
-
-          if (responsePhoto.ok) {
-            const imageBlob = await responsePhoto.blob();
-
-            const options = {
-              maxSizeMB: 0.1, // Tamaño máximo de la imagen comprimida en megabytes
-              maxWidthOrHeight: 800, // Ancho o altura máximo permitido
-              useWebWorker: true,
-            };
-
-            const compressedImage = await imageCompression(imageBlob, options);
-
-            return {
-              ...quincho,
-              photoUrl: URL.createObjectURL(compressedImage),
-            };
-          } else {
-            console.error(
-              `No se pudo cargar la imagen del quincho ${quincho.name}`
+          const photoPromises = quincho.photos.map(async (_, index) => {
+            const responsePhoto = await fetch(
+              `http://localhost:8080/quinchos/fotos/${quincho.id}/${index}`
             );
-            return {
-              ...quincho,
-              photoUrl: null,
-            };
-          }
+        
+            if (responsePhoto.ok) {
+              const imageBlob = await responsePhoto.blob();
+        
+              const options = {
+                maxSizeMB: 0.1, // Tamaño máximo de la imagen comprimida en megabytes
+                maxWidthOrHeight: 800, // Ancho o altura máximo permitido
+                useWebWorker: true,
+              };
+        
+              const compressedImage = await imageCompression(imageBlob, options);
+        
+              return URL.createObjectURL(compressedImage);
+            } else {
+              console.error(
+                `No se pudo cargar la imagen del quincho ${quincho.name}`
+              );
+              return null;
+            }
+          });
+        
+          const photoUrls = await Promise.all(photoPromises);
+        
+          return {
+            ...quincho,
+            photoUrls: photoUrls,
+          };
         });
-        const quinchoWithPhoto = await Promise.all(promises);
-        setQuinchos(quinchoWithPhoto);
+        const quinchoWithPhotos = await Promise.all(promises);
+        setQuinchos(quinchoWithPhotos);
+        
       }
     } catch (error) {
       console.error("Error fetching data:", error);
