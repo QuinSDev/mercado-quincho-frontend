@@ -322,8 +322,7 @@ export const QuinchoForm = ({ fetchDataQuincho }) => {
                           onChange={handleFileChange}
                           multiple
                         />
-                        {/*ver el nombre en el repositorio para que coincida
-                          value={numBathroom} onChange={onInputChange}*/}
+                      
                       </label>
                       <p className="pl-1">o arrastra y sueltalo</p>
                     </div>

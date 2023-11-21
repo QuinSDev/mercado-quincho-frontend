@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { SearchQuincho } from './SearchQuincho'
 import { CardQuincho } from './CardQuincho'
 
-
 export const QuinchoBar = ({quinchos}) => {
     const [quinchos2, setQuinchos2] = useState([])
     const [types, setTypes] = useState(['Todos' , 'Chalet' , 'Quinta' , 'Cabaña']);

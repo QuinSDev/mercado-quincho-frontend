@@ -9,6 +9,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { UserAccount } from "./pages/UserAccount";
 import { EditUserForm } from "./pages/EditUserForm";
 import { jwtDecode } from "jwt-decode";
+import { HelpCenter } from "./pages/HelpCenter";
 import imageCompression from "browser-image-compression";
 import { QuinchoDetails } from "./pages/QuinchoDetails";
 import { EditQuinchoForm } from "./pages/EditQuinchoForm";
@@ -204,6 +205,7 @@ export const App = () => {
             path="/editQuincho"
             element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}
           />
+          <Route path="/helpCenter" element={<HelpCenter />} />
         </Routes>
       </Router>
     </>
