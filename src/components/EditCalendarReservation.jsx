@@ -1,8 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { QuinchoContext } from "./QuinchoProvider";
 
-export const EditCalendarReservation = ({ quincho }) => {
+export const EditCalendarReservation = ({
+  quincho,
+  setIsEditing,
+  setIsDataUpdated,
+}) => {
+  const { selectedQuinchoR, editReservation } = useContext(QuinchoContext);
+  const [quinchos, setQuinchos] = useState([]);
+
+  useEffect(() => {
+    setQuinchos([selectedQuinchoR]);
+  }, [selectedQuinchoR]);
+
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
@@ -31,20 +43,8 @@ export const EditCalendarReservation = ({ quincho }) => {
     console.log(quincho);
     const userEmail = localStorage.getItem("userEmail");
     // Seteando la hora para check-in a las 3 PM y check-out a las 12 PM
-    const checkInTime = "04:00"; // 3 PM
-    const checkOutTime = "02:00"; // 12 PM
-
-    // Crear un objeto Date con la fecha y hora local
-    const checkInDate = new Date(
-      `${startDate.toISOString().split("T")[0]}T${checkInTime}-05:00`
-    );
-    const checkOutDate = new Date(
-      `${endDate.toISOString().split("T")[0]}T${checkOutTime}-05:00`
-    );
-
-    // Convertir la fecha y hora local a la zona horaria UTC
-    const formattedCheckIn = checkInDate.toISOString();
-    const formattedCheckOut = checkOutDate.toISOString();
+    const checkInTime = "15:00"; // 3 PM
+    const checkOutTime = "12:00"; // 12 PM
 
     const days = Math.floor(
       (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
@@ -54,8 +54,8 @@ export const EditCalendarReservation = ({ quincho }) => {
     const requestData = new FormData();
     requestData.append("starDate", startDate.toISOString().split("T")[0]);
     requestData.append("endDate", endDate.toISOString().split("T")[0]);
-    requestData.append("checkIn", formattedCheckIn);
-    requestData.append("checkOut", formattedCheckOut);
+    requestData.append("checkIn", checkInTime);
+    requestData.append("checkOut", checkOutTime);
     requestData.append("totalPayment", totalPrice);
     requestData.append("guest", guests);
 
@@ -72,9 +72,20 @@ export const EditCalendarReservation = ({ quincho }) => {
           body: requestData,
         }
       );
-      const data = await response.json();
-      if (data.msg === "Tu reserva fue exitosa") {
-        alert(data.msg);
+
+      const updatedQuinchoData = await response.json();
+      if (response.ok) {
+        setQuinchos((prevQuinchos) => {
+          return prevQuinchos.map((prevQuincho) => {
+            if (prevQuincho.id === updatedQuinchoData.id) {
+              return updatedQuinchoData; // Reemplaza el quincho antiguo con el actualizado
+            }
+            return prevQuincho;
+          });
+        });
+        editReservation(updatedQuinchoData);
+        setIsEditing(false);
+        setIsDataUpdated(true); // Marcar que los datos se actualizaron
       } else {
         alert(data.msg);
       }
@@ -83,9 +94,13 @@ export const EditCalendarReservation = ({ quincho }) => {
     }
   };
 
+  const handleCancelClick = () => {
+    setIsEditing(false)
+  }
+
   return (
     <div className="bg-gray-100 p-8 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Reserva tu estancia</h2>
+      <h2 className="text-2xl font-semibold mb-4">Actualiza tu estancia</h2>
       <form onSubmit={handleReservationSubmit}>
         <div className="mb-4">
           <label
@@ -140,12 +155,21 @@ export const EditCalendarReservation = ({ quincho }) => {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Reservar
-        </button>
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="btn btnReservas btn-sm p-4"
+          >
+            Actualizar
+          </button>
+          <button
+            type="submit"
+            className="btn btnReservas btn-sm p-4"
+            onClick={handleCancelClick}
+          >
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   );

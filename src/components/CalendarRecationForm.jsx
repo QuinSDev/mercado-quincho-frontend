@@ -33,20 +33,8 @@ export const CalendarReservationForm = ({ quincho }) => {
     console.log(quincho);
     const userEmail = localStorage.getItem("userEmail");
     // Seteando la hora para check-in a las 3 PM y check-out a las 12 PM
-    const checkInTime = "04:00"; // 3 PM
-    const checkOutTime = "02:00"; // 12 PM
-
-    // Crear un objeto Date con la fecha y hora local
-    const checkInDate = new Date(
-      `${startDate.toISOString().split("T")[0]}T${checkInTime}-05:00`
-    );
-    const checkOutDate = new Date(
-      `${endDate.toISOString().split("T")[0]}T${checkOutTime}-05:00`
-    );
-
-    // Convertir la fecha y hora local a la zona horaria UTC
-    const formattedCheckIn = checkInDate.toISOString();
-    const formattedCheckOut = checkOutDate.toISOString();
+    const checkInTime = "15:00"; // 3 PM
+    const checkOutTime = "12:00"; // 12 PM
 
     const days = Math.floor(
       (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
@@ -56,8 +44,8 @@ export const CalendarReservationForm = ({ quincho }) => {
     const requestData = new FormData();
     requestData.append("starDate", startDate.toISOString().split("T")[0]);
     requestData.append("endDate", endDate.toISOString().split("T")[0]);
-    requestData.append("checkIn", formattedCheckIn);
-    requestData.append("checkOut", formattedCheckOut);
+    requestData.append("checkIn", checkInTime);
+    requestData.append("checkOut", checkOutTime);
     requestData.append("totalPayment", totalPrice);
     requestData.append("guest", guests)
 
@@ -102,7 +90,8 @@ export const CalendarReservationForm = ({ quincho }) => {
             selectsStart
             startDate={startDate}
             endDate={endDate}
-            minDate={new Date()}
+            // minDate={new Date()}
+            minDate={startDate}
             className="border rounded w-full py-2 px-3"
             required
           />

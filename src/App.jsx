@@ -17,6 +17,7 @@ import { Profile } from "./components/Profile";
 import { CardUserQuincho } from "./components/CardUserQuincho";
 import { ComentaryList } from "./components/ComentaryList";
 import { ReservationEdit } from "./components/ReservationEdit";
+import { CardUserReservation } from "./components/CardUserReservation";
 
 
 export const App = () => {
@@ -34,10 +35,10 @@ export const App = () => {
         const decoded = jwtDecode(token);
         // const userEmail = decoded.sub;
         localStorage.setItem("userEmail", decoded.sub)
-        const role = decoded.role;
+        localStorage.setItem("role", decoded.role)
         // console.log(decoded)
         if (decoded.role === "ADMIN") {
-          console.log(role);
+          
           setUserRole(true);
         } else {
           setUserRole(false);
@@ -198,6 +199,7 @@ export const App = () => {
             <Route path="quinchos" element={<CardUserQuincho />}/>
             <Route path="reservations" element={<ComentaryList />}/>
             <Route path="edit-reservation" element={<ReservationEdit />}/>
+            <Route path="edit-reservation" element={<CardUserReservation />}/>
           </Route>
           <Route
             path="/editUser"

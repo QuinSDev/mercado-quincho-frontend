@@ -10,6 +10,7 @@ import reservation from "../assets/images/reservation.png"
 import { CardUserQuincho } from './CardUserQuincho';
 import { Link } from "react-router-dom";
 import { ReservationEdit } from './ReservationEdit';
+import { CardUserReservation } from './CardUserReservation';
 
 export const UserBar = ({ quinchos }) => {
 
@@ -40,7 +41,7 @@ export const UserBar = ({ quinchos }) => {
            return <CardUserQuincho quinchos={quinchos}/>
         }
         if (option === 'reservations') {
-            return <ComentaryList changeToEditReserva={changeToEditReserva} />
+            return <CardUserReservation />
          }
          
         if (option == 'editReserva') {
