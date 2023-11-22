@@ -2,26 +2,32 @@ import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarReservationForm } from "../components/CalendarRecationForm";
 import { QuinchoContext } from "../provider/QuinchoProviderDetails";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export const QuinchoDetails = () => {
-
-    const { selectedQuincho } = useContext(QuinchoContext)
-    const [quincho, setQuincho] = useState([]);
+  const { selectedQuincho } = useContext(QuinchoContext);
+  const [quincho, setQuincho] = useState([]);
 
   useEffect(() => {
-    setQuincho(selectedQuincho)
-  }, [])
-    
-  
+    setQuincho(selectedQuincho);
+  }, []);
+
   return (
     <div className="py-8 px-4 sm:px-8 md:h-[78vh] sm:h-[100vh] bg-white flex flex-col md:flex-row items-center">
       <figure className="w-full md:w-1/3">
-        <motion.img
-          whileHover={{ scale: 0.9 }}
-          src={selectedQuincho.photoUrl}
-          alt={selectedQuincho.nameQuincho}
-          className="w-full"
-        />
+        <Carousel>
+          {selectedQuincho.photoUrls.map((photoUrl, index) => (
+            <div key={index}>
+              <motion.img
+                whileHover={{ scale: 0.9 }}
+                src={photoUrl}
+                alt={`${selectedQuincho.nameQuincho} ${index}`}
+                className="w-full"
+              />
+            </div>
+          ))}
+        </Carousel>
       </figure>
       <div className="card-body text-center md:text-left w-full md:w-1/2 mt-4 md:mt-0">
         <motion.h2
@@ -42,7 +48,7 @@ export const QuinchoDetails = () => {
           Precio: ${selectedQuincho.price}
         </p>
         <div className="card-actions flex flex-col md:flex-row justify-center md:justify-start">
-          <CalendarReservationForm quincho={quincho}/>
+          <CalendarReservationForm quincho={quincho} />
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
-// CalendarReservationForm.jsx
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const CalendarReservationForm = ({ quincho }) => {
+export const EditCalendarReservation = ({ quincho }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
@@ -26,7 +25,6 @@ export const CalendarReservationForm = ({ quincho }) => {
   const handleGuestsChange = (e) => {
     setGuests(e.target.value);
   };
-
 
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
@@ -59,12 +57,12 @@ export const CalendarReservationForm = ({ quincho }) => {
     requestData.append("checkIn", formattedCheckIn);
     requestData.append("checkOut", formattedCheckOut);
     requestData.append("totalPayment", totalPrice);
-    requestData.append("guest", guests)
+    requestData.append("guest", guests);
 
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:8080/reservation/register/${userEmail}/${quincho.id}`,
+        `http://localhost:8080/reservation/update/${quincho.idReservation}`,
         {
           method: "POST",
           headers: {
@@ -142,17 +140,12 @@ export const CalendarReservationForm = ({ quincho }) => {
             required
           />
         </div>
-
         <button
           type="submit"
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
         >
           Reservar
         </button>
-        <div className="mt-5 grid grid-cols-2">
-          <p className="justify-self-start"><u>${price} USD X noche</u></p>
-          <p className="justify-self-end">${totalPrice} USD</p>
-        </div>
       </form>
     </div>
   );

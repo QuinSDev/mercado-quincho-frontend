@@ -9,6 +9,7 @@ import user from "../assets/images/user.png"
 import reservation from "../assets/images/reservation.png"
 import { CardUserQuincho } from './CardUserQuincho';
 import { Link } from "react-router-dom";
+import { ReservationEdit } from './ReservationEdit';
 
 export const UserBar = ({ quinchos }) => {
 
@@ -26,6 +27,10 @@ export const UserBar = ({ quinchos }) => {
         setOption('reservations');
       };
 
+      const changeToEditReserva = () => {
+        setOption('editReserva');
+      }
+
 
       const filterOption = (option) => {
         if (option === 'profile') {
@@ -35,8 +40,13 @@ export const UserBar = ({ quinchos }) => {
            return <CardUserQuincho quinchos={quinchos}/>
         }
         if (option === 'reservations') {
-           return <ComentaryList/>
-        }
+            return <ComentaryList changeToEditReserva={changeToEditReserva} />
+         }
+         
+        if (option == 'editReserva') {
+            return <ReservationEdit />
+        } 
+         
         else{
             return <Profile />
         }
