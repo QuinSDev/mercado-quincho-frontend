@@ -205,7 +205,14 @@ export const App = () => {
             path="/editQuincho"
             element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}
           />
-          <Route path="/helpCenter" element={<HelpCenter />} />
+          <Route path="/helpCenter" 
+          element={<HelpCenter 
+          userRole={userRole}
+          isLoggedIn={isLoggedIn}
+          handleLogout={handleLogout}
+          userPhoto={userPhoto}
+          updateAuthStatus={updateAuthStatus} 
+          />} />
         </Routes>
       </Router>
     </>
