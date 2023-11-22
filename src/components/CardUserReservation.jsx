@@ -462,7 +462,7 @@ export const CardUserReservation = ({}) => {
 
                 {/*Comentarios*/}
                 {isStayOver(quincho.endDate) && (
-                  <ComentaryUser />
+                  <ComentaryUser  quincho={quincho}/>
                 )}
               </div>
             </div>

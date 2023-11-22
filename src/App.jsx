@@ -35,7 +35,6 @@ export const App = () => {
         const decoded = jwtDecode(token);
         // const userEmail = decoded.sub;
         localStorage.setItem("userEmail", decoded.sub)
-        localStorage.setItem("role", decoded.role)
         // console.log(decoded)
         if (decoded.role === "ADMIN") {
           

@@ -23,7 +23,7 @@ export const Mail = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_zpi08ol', 'template_tu1fliv', form.current, 'kM2IOsTCpYgbcbpAx')
+        emailjs.sendForm('service_p1glnle', 'template_97gvtf8', form.current, 'TCgJBeMa_jtKNCotx')
             .then((result) => {
                 alert("Mensaje enviado exitosamente");
                 console.log(result.text);

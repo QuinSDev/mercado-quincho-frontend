@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { QuinchoContext } from "./QuinchoProvider";
 
 export const ComentaryList = ({ changeToEditReserva }) => {
-  const { editReservation } = useContext(QuinchoContext)
+  const { editReservation } = useContext(QuinchoContext);
 
-  const handleQuincho = (quincho , event) => {
-    editReservation(quincho)
+  const handleQuincho = (quincho, event) => {
+    editReservation(quincho);
     event.preventDefault();
-  }
-  
+  };
+
   const [reservations, setReservations] = useState([]);
   const [quinchos, setQuinchos] = useState();
 
@@ -21,7 +21,7 @@ export const ComentaryList = ({ changeToEditReserva }) => {
 
       // Obtener las reservas
       const responseReservations = await fetch(
-        `http://localhost:8080/reservation/user/${userEmail}`,
+        `http://localhost:8080/reservation/quincho-reservations/${userEmail}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -81,11 +81,25 @@ export const ComentaryList = ({ changeToEditReserva }) => {
               const photoUrls = await Promise.all(photoPromises);
 
               // Combina los datos de quincho y reservation en un solo objeto
-              combinedData.push({
-                ...dataQuincho,
-                ...reservation,
-                photoUrls: photoUrls,
-              });
+              const responseUser = await fetch(
+                `http://localhost:8080/reservation/user-reservations/${reservation.idReservation}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+
+              if (responseUser.ok) {
+                const dataUser = await responseUser.json();
+
+                combinedData.push({
+                  ...dataQuincho,
+                  ...reservation,
+                  ...dataUser,
+                  photoUrls: photoUrls,
+                });
+              }
             }
           }
 
@@ -139,16 +153,15 @@ export const ComentaryList = ({ changeToEditReserva }) => {
         <h2 className="mt-4 text-2xl border-b-2 md:text-3xl font-bold text-black mb-2 p-2 text-center">
           Reservas hechas
         </h2>
-
-        <table className="table m-6 max-w-lg mx-auto p-6 bg-white rounded-md shadow-2xl">
+        <div>
+        <table className="table m-6 w- max-w-lg mx-auto p-6 bg-white rounded-md shadow-2xl">
           <thead>
             <tr className="mt-6">
-              <th className="text-black text-lg font-bold">Quincho</th>
-              <th className="text-black text-lg font-bold">Tipo de Quincho</th>
+              <th className="text-black text-lg font-bold text-center ">Quincho</th>
+              <th className="text-black text-lg font-bold">Cliente</th>
+              <th className="text-black text-lg font-bold">Invitados</th>
               <th className="text-black text-lg font-bold">Fecha ingreso</th>
               <th className="text-black text-lg font-bold">Fecha salida</th>
-              <th className="text-black text-lg font-bold mt-8">CheckIn</th>
-              <th className="text-black text-lg font-bold mt-8">CheckOut</th>
               <th className="text-black text-lg font-bold mt-8">Total</th>
               <th className="text-black text-lg font-bold mt-8"></th>
             </tr>
@@ -165,25 +178,19 @@ export const ComentaryList = ({ changeToEditReserva }) => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{quincho.nameQuincho}</div>
+                        <div className="font-bold text-center">{quincho.nameQuincho}</div>
                       </div>
                     </div>
                   </td>
-                  <td>{quincho.typeQuincho}</td>
+                  <td className="text-center">{quincho.name}</td>
+                  <td className="text-center">{quincho.guest}</td>
                   {/* Agrega las demás columnas de la tabla aquí */}
-                  <td className="hover:text-[#35C5DF] hover:font-semibold">
+                  <td className="text-center">
                     {quincho.startDate}
                   </td>
-                  <td>{quincho.endDate}</td>
-                  <td>{quincho.checkIn}</td>
-                  <td>{quincho.checkOut}</td>
-                  <td>$ {quincho.totalPayment}</td>
+                  <td className="text-center">{quincho.endDate}</td>
+                  <td className="text-center">$ {quincho.totalPayment}</td>
                   <th>
-                    <Link to="/userAccount/edit-reservation" onClick={(event) => handleQuincho(quincho, event)}>
-                    <button className="btn btnReservas btn-sm p-4 mr-2 mb-1" onClick={changeToEditReserva}>
-                      Modificar
-                    </button>
-                    </Link>
                     <button
                       className="btn btnReservas btn-sm p-4 mt-1"
                       onClick={() => cancelRservation(quincho.idReservation)}
@@ -195,6 +202,7 @@ export const ComentaryList = ({ changeToEditReserva }) => {
               </tbody>
             ))}
         </table>
+        </div>
       </div>
     </>
   );

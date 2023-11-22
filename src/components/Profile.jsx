@@ -20,6 +20,7 @@ export const Profile = () => {
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
         const userEmail = decoded.sub;
+        
 
         const response = await fetch(
           `http://localhost:8080/user/datos/${userEmail}`,
@@ -33,7 +34,7 @@ export const Profile = () => {
         if (response.ok) {
           const userData = await response.json();
           setUsers([userData]);
-
+          localStorage.setItem("role", userData.role)
           const responsePhoto = await fetch(
             `http://localhost:8080/photo/perfil/${userEmail}`,
             {

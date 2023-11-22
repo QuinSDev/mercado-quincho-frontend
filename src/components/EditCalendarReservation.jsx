@@ -40,7 +40,6 @@ export const EditCalendarReservation = ({
 
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
-    console.log(quincho);
     const userEmail = localStorage.getItem("userEmail");
     // Seteando la hora para check-in a las 3 PM y check-out a las 12 PM
     const checkInTime = "15:00"; // 3 PM
