@@ -23,6 +23,23 @@
     height: 50px;
   }
 
+  .btnReservas {
+    background-color: #35C5DF;
+    color: white;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    height: 20px;
+    width: 100px;
+  }
+
+  .btnReservas:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+
   .btnQuincho:hover {
     background-color: black;
     color: white;

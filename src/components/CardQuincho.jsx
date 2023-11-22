@@ -41,7 +41,7 @@ export const CardQuincho = ({ quinchos }) => {
               <div className="mt-2 w-full overflow-hidden  bg-gray-200 lg:h-52 group-hover:opacity-75">
                 {/*hover:opacity-75*/}
                 <img
-                  src={quincho.photoUrl}
+                  src={quincho.photoUrls[0]}
                   alt="imagen del quincho"
                   loading="lazy" // Agrega el atributo loading="lazy"
                   className="w-full object-cover object-center lg:h-full lg:w-full"
