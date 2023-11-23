@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export const UserLoginForm = ({
   closeModal,
@@ -61,9 +62,14 @@ export const UserLoginForm = ({
 
       if (contentType && contentType.indexOf("application/json") !== -1) {
         const data = await response.json();
-        console.log(data);
 
         if (data.token) {
+          const decoded = jwtDecode(data.token)
+          if (!decoded.active) {
+            alert("Tu cuenta ha sido bloqueda, ponde en contacto con nosotros")
+            navigate("/helpCenter")
+            return
+          }
           const token = data.token;
           localStorage.setItem("token", token);
           // Almacenar el token en el almacenamiento local

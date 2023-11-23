@@ -19,7 +19,6 @@ import { ComentaryList } from "./components/ComentaryList";
 import { ReservationEdit } from "./components/ReservationEdit";
 import { CardUserReservation } from "./components/CardUserReservation";
 
-
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -34,10 +33,9 @@ export const App = () => {
       try {
         const decoded = jwtDecode(token);
         // const userEmail = decoded.sub;
-        localStorage.setItem("userEmail", decoded.sub)
+        localStorage.setItem("userEmail", decoded.sub);
         // console.log(decoded)
         if (decoded.role === "ADMIN") {
-          
           setUserRole(true);
         } else {
           setUserRole(false);
@@ -82,18 +80,21 @@ export const App = () => {
             const responsePhoto = await fetch(
               `http://localhost:8080/quinchos/fotos/${quincho.id}/${index}`
             );
-        
+
             if (responsePhoto.ok) {
               const imageBlob = await responsePhoto.blob();
-        
+
               const options = {
                 maxSizeMB: 0.1, // Tamaño máximo de la imagen comprimida en megabytes
                 maxWidthOrHeight: 800, // Ancho o altura máximo permitido
                 useWebWorker: true,
               };
-        
-              const compressedImage = await imageCompression(imageBlob, options);
-        
+
+              const compressedImage = await imageCompression(
+                imageBlob,
+                options
+              );
+
               return URL.createObjectURL(compressedImage);
             } else {
               console.error(
@@ -102,9 +103,9 @@ export const App = () => {
               return null;
             }
           });
-        
+
           const photoUrls = await Promise.all(photoPromises);
-        
+
           return {
             ...quincho,
             photoUrls: photoUrls,
@@ -155,7 +156,7 @@ export const App = () => {
             element={<QuinchoForm fetchDataQuincho={fetchDataQuincho} />}
           />
           <Route
-            path="/quinchos/*"
+            path="/quinchos/"
             element={
               <HomeQuincho
                 userRole={userRole}
@@ -194,11 +195,11 @@ export const App = () => {
               />
             }
           >
-            <Route path="profile" element={<Profile />}/>
-            <Route path="quinchos" element={<CardUserQuincho />}/>
-            <Route path="reservations" element={<ComentaryList />}/>
-            <Route path="edit-reservation" element={<ReservationEdit />}/>
-            <Route path="edit-reservation" element={<CardUserReservation />}/>
+            <Route path="profile" element={<Profile />} />
+            <Route path="quinchos" element={<CardUserQuincho />} />
+            <Route path="reservations" element={<ComentaryList />} />
+            <Route path="edit-reservation" element={<ReservationEdit />} />
+            <Route path="edit-reservation" element={<CardUserReservation />} />
           </Route>
           <Route
             path="/editUser"
@@ -206,18 +207,35 @@ export const App = () => {
           />
           <Route
             path="/quinchosDetails"
-            element={<QuinchoDetails/>} />
+            element={
+              <QuinchoDetails
+                userRole={userRole}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+                userPhoto={userPhoto}
+                updateAuthStatus={updateAuthStatus}
+              />
+            }
+          />
           <Route
             path="/editQuincho"
             element={<EditQuinchoForm fetchDataQuincho={fetchDataQuincho} />}
           />
-          <Route path="/helpCenter" element={<HelpCenter 
-            userRole={userRole}
-            isLoggedIn={isLoggedIn}
-            handleLogout={handleLogout}
-            userPhoto={userPhoto}
-            updateAuthStatus={updateAuthStatus}
-          />} />
+          <Route
+            path="/helpCenter/"
+            element={
+              <HelpCenter
+                userRole={userRole}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+                userPhoto={userPhoto}
+                updateAuthStatus={updateAuthStatus}
+              />
+            }
+          >
+            <Route path="login" element={<UserLoginForm />} />
+            <Route path="register" element={<UserRegisterForm />} />
+          </Route>
         </Routes>
       </Router>
     </>

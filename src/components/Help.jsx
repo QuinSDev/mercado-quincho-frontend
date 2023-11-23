@@ -11,7 +11,7 @@ export const Help = () => {
                     <p className='mt-4'>En este espacio, nos esforzamos por brindarte la mejor asistencia y orientación para hacer que tu experiencia
                         sea excepcional. Ya sea que necesites ayuda para navegar por nuestro sitio o desees sacar el máximo provecho
                         de nuestros servicios, estás en el lugar adecuado.</p>
-                    <p className='mt-2'>Si no encuentras lo que buscas, no dudes en contactarnos directamente. Estamos listos para escucharte y ayudarte
+                    <p className='mt-2'>Si no encuentras lo que buscas o si <strong>tu cuenta ha sido bloqueada</strong>, no dudes en contactarnos directamente. Estamos listos para escucharte y ayudarte
                         en cualquier momento.</p>
 
                     <p className='mt-2'>Apreciamos tu confianza al elegirnos para tu próximo paso. Estamos emocionados de acompañarte en esta experiencia
