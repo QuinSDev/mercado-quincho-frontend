@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const CalendarReservationForm = ({ quincho }) => {
+export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
@@ -30,7 +30,10 @@ export const CalendarReservationForm = ({ quincho }) => {
 
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
-    console.log(quincho);
+    if (!isLoggedIn) {
+      alert("Debes iniciar sesión para realizar una reserva.");
+      return;
+    }
     const userEmail = localStorage.getItem("userEmail");
     // Seteando la hora para check-in a las 3 PM y check-out a las 12 PM
     const checkInTime = "15:00"; // 3 PM

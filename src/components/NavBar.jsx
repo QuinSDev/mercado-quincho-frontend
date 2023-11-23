@@ -7,6 +7,7 @@ import { UserRegisterForm } from "../pages/UserRegisterForm";
 import { UserLoginForm } from "../pages/UserLoginForm";
 
 export const NavBar = ({
+  helpCenter,
   quinchoUserForm,
   userRole,
   isLoggedIn,
@@ -115,7 +116,18 @@ export const NavBar = ({
                   </a>
                 </li>
               </Link>
-            ) : !isLoggedIn ? (
+            ) : !isLoggedIn && helpCenter ? (
+              <Link to="/helpCenter/login">
+                <li className="liMenu">
+                  <a
+                    className="block py-2 text-black font-semibold "
+                    onClick={openModal}
+                  >
+                    Iniciar sesión
+                  </a>
+                </li>
+              </Link>
+            ) : !isLoggedIn  ? (
               <Link to="/login">
                 <li className="liMenu">
                   <a
@@ -126,7 +138,7 @@ export const NavBar = ({
                   </a>
                 </li>
               </Link>
-            ) : null}
+            ): null}
             <Modal
               isOpen={modalOpen}
               onRequestClose={closeModal}
@@ -149,6 +161,17 @@ export const NavBar = ({
                   </a>
                 </li>
               </Link>
+            ) : !isLoggedIn && helpCenter ? (
+              <Link to={"/helpCenter/register"}>
+                <li className="liMenu ">
+                  <a
+                    className="block py-2 text-black font-semibold text-center"
+                    onClick={openRegisterModal}
+                  >
+                    Regístrate
+                  </a>
+                </li>
+              </Link>
             ) : !isLoggedIn ? (
               <Link to={"/register"}>
                 <li className="liMenu ">
@@ -160,7 +183,7 @@ export const NavBar = ({
                   </a>
                 </li>
               </Link>
-            ) : null}
+            ): null}
             <Modal
               isOpen={registerModal}
               onRequestClose={closeRegisterModal}
@@ -181,9 +204,27 @@ export const NavBar = ({
               </Link>
             ) : (
               <Link to="/register/quincho">
-                <li className="liMenu border-y border-gray-200">
+                <li className="liMenu border-t border-b border-gray-200">
                   <a className="block py-2 text-black font-bold ">
                     Sube tu quincho al mercado
+                  </a>
+                </li>
+              </Link>
+            )}
+           
+            {isLoggedIn ? (
+              <Link to="/quinchos/">
+                <li className="">
+                  <a className="block py-2 text-black font-bold ">
+                    Explorar quinchos
+                  </a>
+                </li>
+              </Link>
+            ) : (
+              <Link to="/quinchos/">
+                <li className="liMenu border-b border-gray-200">
+                  <a className="block py-2 text-black font-bold ">
+                    Explorar quinchos
                   </a>
                 </li>
               </Link>
@@ -202,7 +243,7 @@ export const NavBar = ({
             ) : null}
 
             {/*////////////////////////////////////////////////////////////////////*/}
-            <Link to="/helpCenter">
+            <Link to="/helpCenter/">
             <li className="liMenu  border-gray-200">
             
               <a className="block py-2 text-black font-semibold ">
