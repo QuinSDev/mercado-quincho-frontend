@@ -9,6 +9,7 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
   const [guests, setGuests] = useState(1);
   const [price, setPrice] = useState();
   const [totalPrice, setTotalPrice] = useState(0);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     setPrice(quincho.price);
@@ -27,10 +28,9 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
     setGuests(e.target.value);
   };
 
-
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
-    if (!isLoggedIn) {
+    if (!token) {
       alert("Debes iniciar sesión para realizar una reserva.");
       return;
     }
@@ -50,10 +50,9 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
     requestData.append("checkIn", checkInTime);
     requestData.append("checkOut", checkOutTime);
     requestData.append("totalPayment", totalPrice);
-    requestData.append("guest", guests)
+    requestData.append("guest", guests);
 
     try {
-      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:8080/reservation/register/${userEmail}/${quincho.id}`,
         {
@@ -93,8 +92,8 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
             selectsStart
             startDate={startDate}
             endDate={endDate}
-            // minDate={new Date()}
-            minDate={startDate}
+            minDate={new Date()}
+            // minDate={startDate}
             className="border rounded w-full py-2 px-3"
             required
           />
@@ -142,7 +141,9 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
           Reservar
         </button>
         <div className="mt-5 grid grid-cols-2">
-          <p className="justify-self-start"><u>${price} USD X noche</u></p>
+          <p className="justify-self-start">
+            <u>${price} USD X noche</u>
+          </p>
           <p className="justify-self-end">${totalPrice} USD</p>
         </div>
       </form>
