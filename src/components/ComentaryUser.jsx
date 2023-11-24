@@ -86,15 +86,6 @@ export const ComentaryUser = ({ quincho }) => {
             </h3>
           </div>
         )}
-
-        <div className="mt-2 flex justify-center">
-          <button className="m-2 p-2 bg-[#35C5DF] text-white hover:bg-black font-semibold py-2 rounded-md transition duration-300">
-            <img className="h-7 w-7" src={edit} alt="Logo de editar" />
-          </button>
-          <button className="m-2 p-2 bg-[#35C5DF] text-white hover:bg-black font-semibold py-2 rounded-md transition duration-300">
-            <img className="h-8 w-8" src={cancel} alt="Logo de cancelar" />
-          </button>
-        </div>
       </div>
 
       {/* Mostrar el área de texto siempre */}

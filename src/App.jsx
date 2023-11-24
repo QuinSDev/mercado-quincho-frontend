@@ -18,6 +18,7 @@ import { CardUserQuincho } from "./components/CardUserQuincho";
 import { ComentaryList } from "./components/ComentaryList";
 import { ReservationEdit } from "./components/ReservationEdit";
 import { CardUserReservation } from "./components/CardUserReservation";
+import { EditComentaryUser } from "./components/EditComentaryUser";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +29,7 @@ export const App = () => {
   const updateAuthStatus = async () => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
+    console.log(isLoggedIn)
 
     if (token) {
       try {
@@ -198,6 +200,7 @@ export const App = () => {
             <Route path="profile" element={<Profile />} />
             <Route path="quinchos" element={<CardUserQuincho />} />
             <Route path="reservations" element={<ComentaryList />} />
+            <Route path="edit-comentary" element={<EditComentaryUser />}/>
             <Route path="edit-reservation" element={<ReservationEdit />} />
             <Route path="edit-reservation" element={<CardUserReservation />} />
           </Route>

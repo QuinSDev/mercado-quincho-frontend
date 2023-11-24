@@ -71,7 +71,7 @@ export const UserList = () => {
       const response = await fetch(
         `http://localhost:8080/user/disable/${userId}`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -79,23 +79,22 @@ export const UserList = () => {
       );
       if (response.ok) {
         // Actualizar el estado local eliminando al usuario deshabilitado
-        const updatedUsers = users.map(user => {
+        const updatedUsers = users.map((user) => {
           if (user.id === userId) {
             return {
               ...user,
-              active: false // Suponiendo que 'active' es el campo que se actualiza al deshabilitar
+              active: false, // Suponiendo que 'active' es el campo que se actualiza al deshabilitar
             };
           }
           return user;
         });
-  
+
         // Establecer el nuevo estado con el usuario deshabilitado
         setUsers(updatedUsers);
       } else {
         // Manejar el caso en el que la solicitud no es exitosa
-        console.error('Error al deshabilitar usuario');
+        console.error("Error al deshabilitar usuario");
       }
-      
     } catch (error) {
       alert("Error", error);
     }
@@ -108,7 +107,7 @@ export const UserList = () => {
       const response = await fetch(
         `http://localhost:8080/user/activate/${userId}`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -116,23 +115,22 @@ export const UserList = () => {
       );
       if (response.ok) {
         // Actualizar el estado local eliminando al usuario deshabilitado
-        const updatedUsers = users.map(user => {
+        const updatedUsers = users.map((user) => {
           if (user.id === userId) {
             return {
               ...user,
-              active: true // Suponiendo que 'active' es el campo que se actualiza al deshabilitar
+              active: true, // Suponiendo que 'active' es el campo que se actualiza al deshabilitar
             };
           }
           return user;
         });
-  
+
         // Establecer el nuevo estado con el usuario deshabilitado
         setUsers(updatedUsers);
       } else {
         // Manejar el caso en el que la solicitud no es exitosa
-        console.error('Error al deshabilitar usuario');
+        console.error("Error al deshabilitar usuario");
       }
-      
     } catch (error) {
       alert("Error", error);
     }
@@ -161,44 +159,61 @@ export const UserList = () => {
           </thead>
 
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-16 h-16">
-                        <img src={user.photoUrl} alt="Photo User" />
+            {users
+              .slice()
+              .filter((user) => user.role !== "ADMIN") // Filtrar usuarios con rol ADMIN
+              .sort((a, b) => {
+                // Comparar los nombres para ordenar alfabéticamente
+                const nameA = `${a.name} ${a.lastName}`.toUpperCase();
+                const nameB = `${b.name} ${b.lastName}`.toUpperCase();
+
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((user) => (
+                <tr key={user.id}>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-16 h-16">
+                          <img src={user.photoUrl} alt="Photo User" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{user.name}</div>
+                        <div className="text-sm opacity-50">
+                          {user.lastName}
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">{user.lastName}</div>
-                      <div className="text-sm opacity-50">{user.name}</div>
-                    </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td>{user.address}</td>
-                <td>{user.phoneNumber}</td>
-                <td>{user.email}</td>
-                <td>{user.active ? 'Activo' : 'Inactivo'}</td>
-                <td>{user.role}</td>
-                <th>
-                <button
-                    className="btn btnReservas btn-sm p-4 mt-1"
-                    onClick={() => habilitarUser(user.id)}
-                  >
-                    Habilitar
-                  </button>
-                  <button
-                    className="btn btnReservas btn-sm p-4 mt-1"
-                    onClick={() => deshabilitarUser(user.id)}
-                  >
-                    Deshabilitar
-                  </button>
-                 
-                </th>
-              </tr>
-            ))}
+                  <td>{user.address}</td>
+                  <td>{user.phoneNumber}</td>
+                  <td>{user.email}</td>
+                  <td>{user.active ? "Activo" : "Inactivo"}</td>
+                  <td>{user.role}</td>
+                  <th>
+                    <button
+                      className="btn btnReservas btn-sm p-4 mt-1"
+                      onClick={() => habilitarUser(user.id)}
+                    >
+                      Habilitar
+                    </button>
+                    <button
+                      className="btn btnReservas btn-sm p-4 mt-1"
+                      onClick={() => deshabilitarUser(user.id)}
+                    >
+                      Deshabilitar
+                    </button>
+                  </th>
+                </tr>
+              ))}
             ,
           </tbody>
         </table>

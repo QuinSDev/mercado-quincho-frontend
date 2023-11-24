@@ -7,14 +7,16 @@ import { Profile } from "./Profile";
 import home from "../assets/images/home.png";
 import user from "../assets/images/user.png";
 import reservation from "../assets/images/reservation.png";
+import comentary from "../assets/images/comentario.png";
 import { CardUserQuincho } from "./CardUserQuincho";
 import { Link } from "react-router-dom";
 import { ReservationEdit } from "./ReservationEdit";
 import { CardUserReservation } from "./CardUserReservation";
+import { EditComentaryUser } from "./EditComentaryUser";
 
 export const UserBar = ({ quinchos }) => {
   const [option, setOption] = useState("");
-  const role = localStorage.getItem("role")
+  const role = localStorage.getItem("role");
 
   const changeUser = () => {
     setOption("profile");
@@ -24,30 +26,39 @@ export const UserBar = ({ quinchos }) => {
     setOption("quinchos");
   };
 
-  const changeComentary = () => {
+  const changeReservation = () => {
     setOption("reservations");
   };
 
+  const changeComentary = () => {
+    setOption("comentaries");
+  };
+
   const filterOption = (option) => {
-    
-    if (role === 'OWNER' || role === 'ADMIN') {
-        if (option === 'profile') {
-          return <Profile />;
-        }
-        if (option === 'reservations') {
-          return <ComentaryList />;
-        }
-        if (option === 'quinchos') {
-          return <CardUserQuincho quinchos={quinchos} />;
-        }
-      } else if (role === 'CUSTOMER') {
-        if (option === 'profile') {
-          return <Profile />;
-        }
-        if (option === 'reservations') {
-          return <CardUserReservation />;
-        }
+    if (role === "OWNER" || role === "ADMIN") {
+      if (option === "profile") {
+        return <Profile />;
       }
+      if (option === "reservations") {
+        return <ComentaryList />;
+      }
+      if (option === "quinchos") {
+        return <CardUserQuincho quinchos={quinchos} />;
+      }
+      if (option === "comentaries") {
+        return <EditComentaryUser />
+      }
+    } else if (role === "CUSTOMER") {
+      if (option === "profile") {
+        return <Profile />;
+      }
+      if (option === "reservations") {
+        return <CardUserReservation />;
+      }
+      if (option === "comentaries") {
+        return <EditComentaryUser />
+      }
+    }
 
     return <Profile />;
   };
@@ -68,26 +79,42 @@ export const UserBar = ({ quinchos }) => {
               </a>
             </li>
           </Link>
-          {(role === 'OWNER' || role === 'ADMIN') && (
-             <Link to="/userAccount/quinchos">
-             <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md">
-               <a onClick={changeQuincho}>
-                 <img className="h-10 w-10" src={home} alt="Logo de quinchos" />
-                 Tus Quinchos
-               </a>
-             </li>
-           </Link>
+          {(role === "OWNER" || role === "ADMIN") && (
+            <Link to="/userAccount/quinchos">
+              <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md">
+                <a onClick={changeQuincho}>
+                  <img
+                    className="h-10 w-10"
+                    src={home}
+                    alt="Logo de quinchos"
+                  />
+                  Tus Quinchos
+                </a>
+              </li>
+            </Link>
           )}
-         
+
           <Link to="/userAccount/reservations">
             <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md">
-              <a onClick={changeComentary}>
+              <a onClick={changeReservation}>
                 <img
                   className="h-10 w-10"
                   src={reservation}
                   alt="Logo de reservas"
                 />
                 Tus Reservas
+              </a>
+            </li>
+          </Link>
+          <Link to="/userAccount/edit-comentary">
+            <li className="font-semibold text-lg hover:bg-[#35C5DF] rounded-md">
+              <a onClick={changeComentary}>
+                <img
+                  className="h-10 w-10"
+                  src={comentary}
+                  alt="Logo de reservas"
+                />
+                Tus Comentarios
               </a>
             </li>
           </Link>
