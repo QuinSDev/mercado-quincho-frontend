@@ -4,10 +4,10 @@ import { Hero } from "../components/Hero";
 import { Footer } from "../components/Footer";
 
 
-export const Home = () => {
+export const Home = ({ userRole, openRegisterModal, isLoggedIn, handleLogout, userPhoto, updateAuthStatus }) => {
   return (
     <>
-      <NavBar />
+      <NavBar userRole={userRole} openRegisterModal={openRegisterModal} isLoggedIn={isLoggedIn} handleLogout={handleLogout} userPhoto={userPhoto} updateAuthStatus={updateAuthStatus}/>
       <Hero />
       <Footer /> 
     </>

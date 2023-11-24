@@ -26,7 +26,7 @@ export const Hero = () => {
             hoy mismo!
           </p>
           <Link to="/quinchos">
-            <button className="btnQuincho">Ingresar</button>
+            <button className="btnQuincho">Explorar</button>
           </Link>
 
         </div>

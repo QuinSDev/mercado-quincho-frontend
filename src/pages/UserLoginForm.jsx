@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus }) => {
+export const UserLoginForm = ({
+  closeModal,
+  openRegisterModal,
+  updateAuthStatus,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,8 +15,6 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    
 
     if (!email || !password) {
       alert("Por favor, complete todos los campos.");
@@ -59,27 +62,29 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
 
       if (contentType && contentType.indexOf("application/json") !== -1) {
         const data = await response.json();
-        console.log(data);
 
         if (data.token) {
+          const decoded = jwtDecode(data.token)
+          if (!decoded.active) {
+            alert("Tu cuenta ha sido bloqueda, ponde en contacto con nosotros")
+            navigate("/helpCenter")
+            return
+          }
           const token = data.token;
           localStorage.setItem("token", token);
           // Almacenar el token en el almacenamiento local
           updateAuthStatus();
           alert("¡El inicio de sesión fue exitoso!");
-          
+
           closeModal();
           navigate("/");
+        } else if (data.success) {
+          alert(data.msg);
+          closeModal(); // Cierra el modal de inicio de sesión
+          openRegisterModal(); // Abre el modal de registro
+          navigate("/register");
         } else {
-          if (data.userNoR) {
-            alert("Usuario no registrado. Regístrese primero.");
-            closeModal(); // Cierra el modal de inicio de sesión
-            openRegisterModal(); // Abre el modal de registro
-            navigate("/register");
-          }
-          if (data.contraI) {
-            alert(data.contraI)
-          }
+          alert(data.msg);
         }
       } else {
         alert(data.msg);
@@ -125,28 +130,30 @@ export const UserLoginForm = ({ closeModal, openRegisterModal, updateAuthStatus 
         Iniciar sesión
       </h2>
       <form className="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-2xl">
-
-
-      <div className="mt-6 formQuincho">
-          <input type="email"
+        <div className="mt-6 formQuincho">
+          <input
+            type="email"
             name="email"
             id="email"
-            value={email} onChange={(e) => setEmail(e.target.value)}
-            placeholder=" " />
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder=" "
+          />
           <label htmlFor="email">Email</label>
         </div>
 
         <div className="mt-6 formQuincho">
-          <input type="password"
+          <input
+            type="password"
             name="password"
             id="password"
-            value={password} onChange={(e) => setPassword(e.target.value)}
-            placeholder=" " />
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder=" "
+          />
           <label htmlFor="password">Contraseña</label>
         </div>
 
-
-      
         <div className="mb-4">
           <div className="flex items-start">
             <div className="flex items-center h-5">
