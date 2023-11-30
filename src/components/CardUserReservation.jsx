@@ -55,7 +55,7 @@ export const CardUserReservation = ({}) => {
 
           for (const reservation of dataReservas) {
             const responseQuincho = await fetch(
-              `http://localhost:8080/reservation/quincho/${reservation.idReservation}`,
+              `https://mucho-cattle-production.up.railway.app/reservation/quincho/${reservation.idReservation}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ export const CardUserReservation = ({}) => {
 
               const photoPromises = dataQuincho.photos.map(async (_, index) => {
                 const responsePhoto = await fetch(
-                  `http://localhost:8080/quinchos/fotos/${dataQuincho.id}/${index}`
+                  `https://mucho-cattle-production.up.railway.app/quinchos/fotos/${dataQuincho.id}/${index}`
                 );
 
                 if (responsePhoto.ok) {
@@ -130,7 +130,7 @@ export const CardUserReservation = ({}) => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:8080/reservation/delete/${reservationId}`,
+        `https://mucho-cattle-production.up.railway.app/reservation/delete/${reservationId}`,
         {
           method: "DELETE",
           headers: {
