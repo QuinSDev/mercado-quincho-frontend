@@ -54,7 +54,7 @@ export const CalendarReservationForm = ({ quincho, isLoggedIn }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/reservation/register/${userEmail}/${quincho.id}`,
+        `https://mucho-cattle-production.up.railway.app/reservation/register/${userEmail}/${quincho.id}`,
         {
           method: "POST",
           headers: {

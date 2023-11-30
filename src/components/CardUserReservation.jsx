@@ -37,7 +37,7 @@ export const CardUserReservation = ({}) => {
 
       // Obtener las reservas
       const responseReservations = await fetch(
-        `http://localhost:8080/reservation/user/${userEmail}`,
+        `https://mucho-cattle-production.up.railway.app/reservation/user/${userEmail}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

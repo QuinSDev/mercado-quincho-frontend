@@ -12,7 +12,7 @@ export const Comentaries = ({ comentaries }) => {
           comentaries.map(async (comment) => {
             try {
               const responseUser = await fetch(
-                `http://localhost:8080/customer-opinions/user/${comment.id}`,
+                `https://mucho-cattle-production.up.railway.app/customer-opinions/user/${comment.id}`,
                 {
                   
                 }
@@ -26,7 +26,7 @@ export const Comentaries = ({ comentaries }) => {
 
               const userData = await responseUser.json();
               const responsePhoto = await fetch(
-                `http://localhost:8080/photo/perfil/${userData.email}`,
+                `https://mucho-cattle-production.up.railway.app/photo/perfil/${userData.email}`,
                 {
                   
                 }

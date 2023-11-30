@@ -64,7 +64,7 @@ export const EditUserForm = ({ updateAuthStatus }) => {
     });
   };
 
-  const API_URL = "http://localhost:8080/user/perfil";
+  const API_URL = "https://mucho-cattle-production.up.railway.app/user/perfil";
 
   const submitUser = async () => {
     const token = localStorage.getItem("token");

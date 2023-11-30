@@ -22,7 +22,7 @@ export const UserAccount = ({
       const userEmail = decoded.sub;
 
       const responseQuincho = await fetch(
-        `http://localhost:8080/quincho/user/quinchos/${userEmail}`,
+        `https://mucho-cattle-production.up.railway.app/quincho/user/quinchos/${userEmail}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

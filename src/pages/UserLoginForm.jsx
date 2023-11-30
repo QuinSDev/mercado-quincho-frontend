@@ -39,7 +39,7 @@ export const UserLoginForm = ({
     return emailRegex.test(email);
   };
 
-  const API_URL = "http://localhost:8080/auth/login";
+  const API_URL = "https://mucho-cattle-production.up.railway.app/auth/login";
 
   const submitUser = async () => {
     try {

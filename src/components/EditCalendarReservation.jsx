@@ -61,7 +61,7 @@ export const EditCalendarReservation = ({
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:8080/reservation/update/${quincho.idReservation}`,
+        `https://mucho-cattle-production.up.railway.app/reservation/update/${quincho.idReservation}`,
         {
           method: "POST",
           headers: {

@@ -9,7 +9,7 @@ export const ComentariesAdmin = () => {
     const fetchData = async () => {
       try {
         const responseComentaries = await fetch(
-          "http://localhost:8080/admin/opinions",
+          "https://mucho-cattle-production.up.railway.app/admin/opinions",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const ComentariesAdmin = () => {
 
         for (const comment of dataComentaries) {
           const userResponse = await fetch(
-            `http://localhost:8080/customer-opinions/user/${comment.id}`,
+            `https://mucho-cattle-production.up.railway.app/customer-opinions/user/${comment.id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export const ComentariesAdmin = () => {
             console.log(userData);
 
             const quinchoResponse = await fetch(
-              `http://localhost:8080/customer-opinions/comentary/quincho/${comment.id}`,
+              `https://mucho-cattle-production.up.railway.app/customer-opinions/comentary/quincho/${comment.id}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ export const ComentariesAdmin = () => {
               const photoUrls = await Promise.all(
                 quinchoData.photos.map(async (_, index) => {
                   const responsePhoto = await fetch(
-                    `http://localhost:8080/quinchos/fotos/${quinchoData.id}/${index}`
+                    `https://mucho-cattle-production.up.railway.app/quinchos/fotos/${quinchoData.id}/${index}`
                   );
 
                   if (responsePhoto.ok) {
@@ -108,7 +108,7 @@ export const ComentariesAdmin = () => {
   const eliminarComentario = async (comentaryId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/customer-opinions/delete/${comentaryId}`,
+        `https://mucho-cattle-production.up.railway.app/customer-opinions/delete/${comentaryId}`,
         {
           method: "DELETE",
           headers: {

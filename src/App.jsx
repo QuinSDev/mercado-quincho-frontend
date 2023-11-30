@@ -44,7 +44,7 @@ export const App = () => {
         }
 
         const response = await fetch(
-          `http://localhost:8080/photo/perfil/${decoded.sub}`,
+          `https://mucho-cattle-production.up.railway.app/photo/perfil/${decoded.sub}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export const App = () => {
   const fetchDataQuincho = async () => {
     try {
       const responseQuincho = await fetch(
-        "http://localhost:8080/quincho/lista-quinchos"
+        "https://mucho-cattle-production.up.railway.app/quincho/lista-quinchos"
       );
 
       if (responseQuincho.ok) {
@@ -80,7 +80,7 @@ export const App = () => {
         const promises = dataQuinchos.map(async (quincho) => {
           const photoPromises = quincho.photos.map(async (_, index) => {
             const responsePhoto = await fetch(
-              `http://localhost:8080/quinchos/fotos/${quincho.id}/${index}`
+              `https://mucho-cattle-production.up.railway.app/quinchos/fotos/${quincho.id}/${index}`
             );
 
             if (responsePhoto.ok) {

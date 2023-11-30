@@ -29,7 +29,7 @@ export const ComentaryUser = ({ quincho }) => {
       requestData.append("comment", commentToShow);
 
       const responseOpinion = await fetch(
-        `http://localhost:8080/customer-opinions/register/${userEmail}/${quincho.id}`,
+        `https://mucho-cattle-production.up.railway.app/customer-opinions/register/${userEmail}/${quincho.id}`,
         {
           method: "POST",
           headers: {

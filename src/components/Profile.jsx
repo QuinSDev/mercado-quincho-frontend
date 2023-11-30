@@ -23,7 +23,7 @@ export const Profile = () => {
         
 
         const response = await fetch(
-          `http://localhost:8080/user/datos/${userEmail}`,
+          `https://mucho-cattle-production.up.railway.app/user/datos/${userEmail}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const Profile = () => {
           setUsers([userData]);
           localStorage.setItem("role", userData.role)
           const responsePhoto = await fetch(
-            `http://localhost:8080/photo/perfil/${userEmail}`,
+            `https://mucho-cattle-production.up.railway.app/photo/perfil/${userEmail}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

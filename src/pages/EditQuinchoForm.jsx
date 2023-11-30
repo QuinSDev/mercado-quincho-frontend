@@ -68,7 +68,7 @@ export const EditQuinchoForm = ({ fetchDataQuincho }) => {
     submitUser();
   };
 
-  const API_URL = `http://localhost:8080/quincho/edit/${selectedQuincho.id}`;
+  const API_URL = `https://mucho-cattle-production.up.railway.app/quincho/edit/${selectedQuincho.id}`;
 
 
   const submitUser = async () => {

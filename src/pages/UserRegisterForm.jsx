@@ -67,7 +67,7 @@ export const UserRegisterForm = ({ closeRegisterModal, openModal }) => {
     });
   };
 
-  const API_URL = "http://localhost:8080/auth/register";
+  const API_URL = "https://mucho-cattle-production.up.railway.app/auth/register";
 
   const submitUser = async () => {
     const requestData = new FormData();
