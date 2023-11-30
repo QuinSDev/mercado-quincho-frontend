@@ -37,7 +37,7 @@ export const UserAccount = ({
         const promises = quinchoData.map(async (quincho) => {
           const photoPromises = quincho.photos.map(async (_, index) => {
             const responsePhoto = await fetch(
-              `http://localhost:8080/quinchos/fotos/${quincho.id}/${index}`
+              `https://mucho-cattle-production.up.railway.app/quinchos/fotos/${quincho.id}/${index}`
             );
         
             if (responsePhoto.ok) {

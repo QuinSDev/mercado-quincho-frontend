@@ -30,7 +30,7 @@ export const QuinchoDetails = ({
       try {
         const token = localStorage.getItem("token");
         const responseComentaries = await fetch(
-          `http://localhost:8080/customer-opinions/quincho/${selectedQuincho.id}`,
+          `https://mucho-cattle-production.up.railway.app/customer-opinions/quincho/${selectedQuincho.id}`,
           {}
         );
 
