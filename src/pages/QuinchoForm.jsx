@@ -75,7 +75,7 @@ export const QuinchoForm = ({ fetchDataQuincho }) => {
 
     const decoded = jwtDecode(token);
     const userEmail = decoded.sub;
-    const API_URL = `http://localhost:8080/quincho/register/${userEmail}`;
+    const API_URL = `https://mucho-cattle-production.up.railway.app/quincho/register/${userEmail}`;
 
     if (!nameQuincho || !location || !description || !price || !typeQuincho || !numGuest || !numBed || !numBedroom || !numBathroom || files.length === 0) {
       alert("Por favor, completa todos los campos antes de enviar el formulario.");
